@@ -191,11 +191,16 @@ export function OnboardingScreen() {
           <View className="h-1 w-1 rounded-full bg-outlineSoft" />
         </View>
 
-        <Pressable accessibilityRole="button" className="p-2" onPress={() => navigation.navigate(AuthRoutes.LOGIN)}>
-          <Text className="text-sm text-textMuted">
-            Já tem uma conta? <Text className="font-extrabold text-primary">Entrar</Text>
-          </Text>
-        </Pressable>
+        <View className="flex-row items-center justify-center">
+          <Text className="text-sm text-textMuted">Já tem uma conta?</Text>
+          <Pressable
+            accessibilityRole="button"
+            className="px-1 py-2"
+            onPress={() => navigation.navigate(AuthRoutes.LOGIN)}
+          >
+            <Text className="text-sm font-semibold text-primary">Entrar</Text>
+          </Pressable>
+        </View>
 
       </Animated.View>
 
