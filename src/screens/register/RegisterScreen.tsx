@@ -5,7 +5,7 @@ import { Image, Pressable, StyleSheet, Text, TextInput, View } from 'react-nativ
 
 import { Button } from '../../components/button';
 import { PasswordInput } from '../../components/password-input';
-import { AuthRoutes, PrivateRoutes } from '../../constants/routes';
+import { AuthRoutes } from '../../constants/routes';
 import { supabase } from '../../lib/supabase';
 import { RootStackParamList } from '../../navigation/types';
 import { colors, radius, spacing } from '../../theme/theme';
@@ -74,7 +74,6 @@ export function RegisterScreen() {
     }
 
     if (data.session) {
-      navigation.replace(PrivateRoutes.MAIN);
       return;
     }
 

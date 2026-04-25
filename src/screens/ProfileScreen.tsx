@@ -1,10 +1,21 @@
+import { useState } from 'react';
 import { ScrollView, StyleSheet, Text } from 'react-native';
 
+import { Button } from '../components/button';
 import { Card } from '../components/Card';
 import { recommendations } from '../data/energy';
+import { supabase } from '../lib/supabase';
 import { colors, spacing } from '../theme/theme';
 
 export function ProfileScreen() {
+  const [isSigningOut, setIsSigningOut] = useState(false);
+
+  async function handleSignOut() {
+    setIsSigningOut(true);
+    await supabase.auth.signOut();
+    setIsSigningOut(false);
+  }
+
   return (
     <ScrollView contentContainerStyle={styles.content} showsVerticalScrollIndicator={false}>
       <Text style={styles.title}>Minha casa</Text>
@@ -21,6 +32,8 @@ export function ProfileScreen() {
           </Text>
         ))}
       </Card>
+
+      <Button isLoading={isSigningOut} label="Sair" loadingLabel="Saindo..." onPress={handleSignOut} />
     </ScrollView>
   );
 }

@@ -1,6 +1,7 @@
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { Session } from '@supabase/supabase-js';
 
 import { TabBar, TabKey } from '../components/TabBar';
 import { AuthRoutes, GeneralRoutes, PrivateRoutes } from '../constants/routes';
@@ -12,32 +13,52 @@ import { ProfileScreen } from '../screens/ProfileScreen';
 import { RegisterScreen } from '../screens/register/RegisterScreen';
 import { UsageScreen } from '../screens/UsageScreen';
 import { colors } from '../theme/theme';
+import { supabase } from '../lib/supabase';
 import { RootStackParamList } from './types';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
 export function AppRouter() {
+  const [isLoadingSession, setIsLoadingSession] = useState(true);
+  const [session, setSession] = useState<Session | null>(null);
+
+  useEffect(() => {
+    supabase.auth.getSession().then(({ data }) => {
+      setSession(data.session);
+      setIsLoadingSession(false);
+    });
+
+    const { data } = supabase.auth.onAuthStateChange((_event, currentSession) => {
+      setSession(currentSession);
+      setIsLoadingSession(false);
+    });
+
+    return () => {
+      data.subscription.unsubscribe();
+    };
+  }, []);
+
+  if (isLoadingSession) {
+    return null;
+  }
+
   return (
     <NavigationContainer>
       <Stack.Navigator
-        initialRouteName={GeneralRoutes.ONBOARDING}
         screenOptions={{
           contentStyle: { backgroundColor: colors.background },
           headerShown: false
         }}
       >
-        <Stack.Group>
-          <Stack.Screen component={OnboardingScreen} name={GeneralRoutes.ONBOARDING} />
-        </Stack.Group>
-
-        <Stack.Group>
-          <Stack.Screen component={AuthScreen} name={AuthRoutes.LOGIN} />
-          <Stack.Screen component={RegisterScreen} name={AuthRoutes.REGISTER} />
-        </Stack.Group>
-
-        <Stack.Group>
+        {session ? (
           <Stack.Screen component={MainScreen} name={PrivateRoutes.MAIN} />
-        </Stack.Group>
+        ) : (
+          <>
+            <Stack.Screen component={OnboardingScreen} name={GeneralRoutes.ONBOARDING} />
+            <Stack.Screen component={AuthScreen} name={AuthRoutes.LOGIN} />
+            <Stack.Screen component={RegisterScreen} name={AuthRoutes.REGISTER} />
+          </>
+        )}
       </Stack.Navigator>
     </NavigationContainer>
   );

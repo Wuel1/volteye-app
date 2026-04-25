@@ -10,7 +10,7 @@ import {
   View,
 } from "react-native";
 
-import { AuthRoutes, PrivateRoutes } from "../../constants/routes";
+import { AuthRoutes } from "../../constants/routes";
 import { RootStackParamList } from "../../navigation/types";
 import { colors, radius, spacing } from "../../theme/theme";
 import { Button } from "@/components/button";
@@ -48,7 +48,7 @@ export function AuthScreen() {
       return;
     }
 
-    navigation.replace(PrivateRoutes.MAIN);
+    // AppRouter listens to Supabase auth changes and swaps to the private stack.
   }
 
   return (
