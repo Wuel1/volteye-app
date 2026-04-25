@@ -1,5 +1,7 @@
+import { ChevronRight } from 'lucide-react-native';
 import { useEffect, useRef } from 'react';
-import { Animated, Easing, Image, Pressable, StyleSheet, Text, View } from 'react-native';
+import { Animated, Easing, Image, Pressable, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+
 
 type OnboardingScreenProps = {
   onStart: () => void;
@@ -9,6 +11,7 @@ export function OnboardingScreen({ onStart }: OnboardingScreenProps) {
   const intro = useRef(new Animated.Value(0)).current;
   const pulse = useRef(new Animated.Value(0)).current;
   const float = useRef(new Animated.Value(0)).current;
+  const voltEyeLogo = require('../../../assets/volteye-logo.png');
 
   useEffect(() => {
     Animated.timing(intro, {
@@ -125,17 +128,17 @@ export function OnboardingScreen({ onStart }: OnboardingScreenProps) {
   };
 
   return (
-    <View className="flex-1 items-center justify-between overflow-hidden bg-background px-6 pb-8 pt-4">
-      <Animated.Text className="text-2xl font-black text-primary" style={introStyle}>
+    <View className="flex-1 items-center justify-center gap-6 overflow-hidden bg-background px-6 pb-8 pt-4">
+      {/* <Animated.Text className="text-2xl font-black text-primary" style={introStyle}>
         VoltEye
-      </Animated.Text>
+      </Animated.Text> */}
 
-      <Animated.View className="relative mt-2 h-[300px] w-full items-center justify-center" style={introStyle}>
+      <Animated.View className="relative h-[300px] w-full items-center justify-center" style={introStyle}>
         <Animated.View
           className="absolute left-0 top-2 z-10 rounded-control border border-[#eef0ff] bg-surface px-4 py-2 shadow-sm"
           style={floatUpStyle}
         >
-          <Text className="text-xs font-semibold text-textMuted">~ Eficiencia: 98%</Text>
+          <Text className="text-xs font-semibold text-textMuted">Eficiencia: 98%</Text>
         </Animated.View>
 
         <Animated.View
@@ -144,14 +147,16 @@ export function OnboardingScreen({ onStart }: OnboardingScreenProps) {
         >
           <View className="h-[184px] w-[184px] items-center justify-center rounded-full bg-background shadow-sm">
             <Animated.View
-              className="h-[140px] w-[140px] items-center justify-center overflow-hidden rounded-full bg-[#8c82f4] shadow-md"
+              className="h-[140px] w-[140px] items-center justify-center overflow-hidden rounded-full shadow-md"
               style={coreStyle}
             >
               <View style={styles.wave} />
               <View style={[styles.wave, styles.waveSecond]} />
-              <Animated.Text className="text-[42px] font-black text-surface" style={boltStyle}>
-                ⚡
-              </Animated.Text>
+              <Animated.Image
+                className="h-40 w-40"
+                resizeMode="contain"
+                source={voltEyeLogo}
+              />
             </Animated.View>
           </View>
         </Animated.View>
@@ -164,21 +169,21 @@ export function OnboardingScreen({ onStart }: OnboardingScreenProps) {
         </Animated.View>
       </Animated.View>
 
-      <Animated.View className="w-full items-center gap-4" style={introStyle}>
+      <Animated.View className="w-full items-center gap-8" style={introStyle}>
         <Text className="text-center text-[29px] font-black leading-9 text-textMain">Bem-vindo ao{'\n'}VoltEye</Text>
         <Text className="max-w-[238px] text-center text-sm leading-[22px] text-textMuted">
           Monitore seu consumo de energia em tempo real e economize de verdade.
         </Text>
-      </Animated.View>
 
-      <Animated.View className="w-full items-center gap-2" style={introStyle}>
-        <Pressable
+        <TouchableOpacity
+          activeOpacity={0.82}
           accessibilityRole="button"
-          className="min-h-11 w-full items-center justify-center rounded-control bg-[#7f91ff] shadow-md"
+          className="min-h-11 w-full flex-row items-center justify-center gap-2 rounded-control bg-[#7f91ff] shadow-md"
           onPress={onStart}
         >
-          <Text className="text-[13px] font-bold text-surface">Comecar Agora {'->'}</Text>
-        </Pressable>
+          <Text className="text-[13px] font-bold text-surface">Começar Agora</Text>
+          <ChevronRight color="white" size={20} strokeWidth={3} />
+        </TouchableOpacity>
 
         <View className="flex-row gap-1">
           <View className="h-1 w-1.5 rounded-full bg-primary" />
@@ -187,13 +192,14 @@ export function OnboardingScreen({ onStart }: OnboardingScreenProps) {
         </View>
 
         <Pressable accessibilityRole="button" className="p-2" onPress={onStart}>
-          <Text className="text-xs text-textMuted">
+          <Text className="text-sm text-textMuted">
             Ja tem uma conta? <Text className="font-extrabold text-primary">Entrar</Text>
           </Text>
         </Pressable>
+
       </Animated.View>
 
-      <Image source={require('../../../assets/volteye-logo.png')} style={styles.logoWatermark} />
+      <Image source={voltEyeLogo} style={styles.logoWatermark} />
     </View>
   );
 }
