@@ -1,19 +1,21 @@
 import './global.css';
 import { StyleSheet, View } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 
 import { AppRouter } from './src/navigation/app-router';
 import { colors } from './src/theme/theme';
 
 export default function App() {
   return (
-    <SafeAreaView style={styles.safeArea}>
-      <StatusBar style="dark" />
-      <View style={styles.app}>
-        <AppRouter />
-      </View>
-    </SafeAreaView>
+    <SafeAreaProvider>
+      <SafeAreaView edges={['top', 'bottom']} style={styles.safeArea}>
+        <StatusBar style="dark" />
+        <View style={styles.app}>
+          <AppRouter />
+        </View>
+      </SafeAreaView>
+    </SafeAreaProvider>
   );
 }
 

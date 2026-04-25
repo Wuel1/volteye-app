@@ -55,14 +55,14 @@ const styles = StyleSheet.create({
   content: {
     gap: spacing.md,
     padding: spacing.md,
-    paddingBottom: spacing.xl
+    paddingBottom: spacing.xl + 88,
+    paddingTop: spacing.lg
   },
   header: {
     alignItems: 'center',
     flexDirection: 'row',
     gap: spacing.md,
-    justifyContent: 'space-between',
-    paddingTop: spacing.sm
+    justifyContent: 'space-between'
   },
   eyebrow: {
     color: colors.primary,
