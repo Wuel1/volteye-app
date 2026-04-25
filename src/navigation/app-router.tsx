@@ -9,6 +9,7 @@ import { AlertsScreen } from '../screens/AlertsScreen';
 import { HomeScreen } from '../screens/HomeScreen';
 import { OnboardingScreen } from '../screens/onboarding/onboarding';
 import { ProfileScreen } from '../screens/ProfileScreen';
+import { RegisterScreen } from '../screens/register/RegisterScreen';
 import { UsageScreen } from '../screens/UsageScreen';
 import { colors } from '../theme/theme';
 import { RootStackParamList } from './types';
@@ -31,6 +32,7 @@ export function AppRouter() {
 
         <Stack.Group>
           <Stack.Screen component={AuthScreen} name={AuthRoutes.LOGIN} />
+          <Stack.Screen component={RegisterScreen} name={AuthRoutes.REGISTER} />
         </Stack.Group>
 
         <Stack.Group>

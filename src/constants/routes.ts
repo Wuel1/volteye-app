@@ -1,5 +1,6 @@
 export const AuthRoutes = {
-  LOGIN: 'Auth'
+  LOGIN: 'Auth',
+  REGISTER: 'Register'
 } as const;
 
 export const GeneralRoutes = {
