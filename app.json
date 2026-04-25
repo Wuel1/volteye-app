@@ -1,0 +1,31 @@
+{
+  "expo": {
+    "name": "VoltEye",
+    "slug": "volteye-mobile",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/volteye-logo.png",
+    "userInterfaceStyle": "light",
+    "splash": {
+      "image": "./assets/volteye-logo.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#faf8ff"
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": true
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/volteye-logo.png",
+        "backgroundColor": "#faf8ff"
+      }
+    },
+    "web": {
+      "bundler": "metro",
+      "favicon": "./assets/volteye-logo.png"
+    }
+  }
+}
