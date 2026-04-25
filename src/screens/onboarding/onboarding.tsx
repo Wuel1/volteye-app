@@ -1,13 +1,17 @@
 import { ChevronRight } from 'lucide-react-native';
+import { useNavigation } from '@react-navigation/native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { useEffect, useRef } from 'react';
-import { Animated, Easing, Image, Pressable, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { Animated, Easing, Image, Pressable, StyleSheet, Text, View } from 'react-native';
 
+import { Button } from '../../components/button';
+import { AuthRoutes } from '../../constants/routes';
+import { RootStackParamList } from '../../navigation/types';
 
-type OnboardingScreenProps = {
-  onStart: () => void;
-};
+type OnboardingNavigationProp = NativeStackNavigationProp<RootStackParamList, 'Onboarding'>;
 
-export function OnboardingScreen({ onStart }: OnboardingScreenProps) {
+export function OnboardingScreen() {
+  const navigation = useNavigation<OnboardingNavigationProp>();
   const intro = useRef(new Animated.Value(0)).current;
   const pulse = useRef(new Animated.Value(0)).current;
   const float = useRef(new Animated.Value(0)).current;
@@ -175,15 +179,11 @@ export function OnboardingScreen({ onStart }: OnboardingScreenProps) {
           Monitore seu consumo de energia em tempo real e economize de verdade.
         </Text>
 
-        <TouchableOpacity
-          activeOpacity={0.82}
-          accessibilityRole="button"
-          className="min-h-11 w-full flex-row items-center justify-center gap-2 rounded-control bg-[#7f91ff] shadow-md"
-          onPress={onStart}
-        >
-          <Text className="text-[13px] font-bold text-surface">Começar Agora</Text>
-          <ChevronRight color="white" size={20} strokeWidth={3} />
-        </TouchableOpacity>
+        <Button
+          label="Começar Agora"
+          onPress={() => navigation.navigate(AuthRoutes.LOGIN)}
+          rightIcon={<ChevronRight color="white" size={20} strokeWidth={3} />}
+        />
 
         <View className="flex-row gap-1">
           <View className="h-1 w-1.5 rounded-full bg-primary" />
@@ -191,9 +191,9 @@ export function OnboardingScreen({ onStart }: OnboardingScreenProps) {
           <View className="h-1 w-1 rounded-full bg-outlineSoft" />
         </View>
 
-        <Pressable accessibilityRole="button" className="p-2" onPress={onStart}>
+        <Pressable accessibilityRole="button" className="p-2" onPress={() => navigation.navigate(AuthRoutes.LOGIN)}>
           <Text className="text-sm text-textMuted">
-            Ja tem uma conta? <Text className="font-extrabold text-primary">Entrar</Text>
+            Já tem uma conta? <Text className="font-extrabold text-primary">Entrar</Text>
           </Text>
         </Pressable>
 
