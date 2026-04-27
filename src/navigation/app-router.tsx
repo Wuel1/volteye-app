@@ -11,7 +11,7 @@ import { HomeScreen } from '../screens/home';
 import { OnboardingScreen } from '../screens/onboarding/onboarding';
 import { ProfileScreen } from '../screens/ProfileScreen';
 import { RegisterScreen } from '../screens/register/RegisterScreen';
-import { UsageScreen } from '../screens/UsageScreen';
+import { UsageScreen } from '../screens/usage';
 import { colors } from '../theme/theme';
 import { supabase } from '../lib/supabase';
 import { RootStackParamList } from './types';

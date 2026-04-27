@@ -117,3 +117,145 @@ export const emptyHomeMock: HomeData = {
   summary: homeMock.summary,
   chart: homeMock.chart
 };
+
+export type ConsumptionPeriodKey = 'today' | 'week' | 'month';
+
+export type ConsumptionComparisonDirection = 'up' | 'down';
+
+export type ConsumptionPeriod = {
+  totalKwh: number;
+  estimatedCost: number;
+  average: string;
+  peak: string;
+  comparison: {
+    value: number;
+    direction: ConsumptionComparisonDirection;
+    text: string;
+  };
+  chart: {
+    label: string;
+    value: number;
+  }[];
+  peaks: {
+    label: string;
+    value: string;
+  }[];
+  insight: string;
+};
+
+export type ConsumptionData = {
+  selectedDevice: {
+    id: string;
+    name: string;
+    room: string;
+    status: HomeDeviceStatus;
+  } | null;
+  devices: {
+    id: string;
+    name: string;
+    room: string;
+    status: HomeDeviceStatus;
+  }[];
+  periods: Record<ConsumptionPeriodKey, ConsumptionPeriod>;
+};
+
+export const consumptionMock: ConsumptionData = {
+  selectedDevice: {
+    id: '1',
+    name: 'Tomada principal',
+    room: 'Sala',
+    status: 'online'
+  },
+  devices: [
+    {
+      id: '1',
+      name: 'Tomada principal',
+      room: 'Sala',
+      status: 'online'
+    },
+    {
+      id: '2',
+      name: 'Geladeira cozinha',
+      room: 'Cozinha',
+      status: 'offline'
+    }
+  ],
+  periods: {
+    today: {
+      totalKwh: 3.8,
+      estimatedCost: 2.37,
+      average: '0,48 kWh/h',
+      peak: '18h as 20h',
+      comparison: {
+        value: 12,
+        direction: 'up',
+        text: 'Hoje voce consumiu 12% mais energia que ontem ate este horario.'
+      },
+      chart: [
+        { label: '00h', value: 0.2 },
+        { label: '03h', value: 0.1 },
+        { label: '06h', value: 0.4 },
+        { label: '09h', value: 0.5 },
+        { label: '12h', value: 0.8 },
+        { label: '15h', value: 0.7 },
+        { label: '18h', value: 1.4 },
+        { label: '21h', value: 0.9 }
+      ],
+      peaks: [
+        { label: '18h as 20h', value: '1,4 kWh' },
+        { label: '12h as 14h', value: '0,8 kWh' },
+        { label: '21h as 22h', value: '0,7 kWh' }
+      ],
+      insight: 'Seu maior consumo aconteceu no periodo da noite, principalmente entre 18h e 20h.'
+    },
+    week: {
+      totalKwh: 24.6,
+      estimatedCost: 15.38,
+      average: '3,5 kWh/dia',
+      peak: 'Sexta-feira',
+      comparison: {
+        value: 8,
+        direction: 'down',
+        text: 'Esta semana esta 8% abaixo da semana passada.'
+      },
+      chart: [
+        { label: 'Seg', value: 3.1 },
+        { label: 'Ter', value: 2.8 },
+        { label: 'Qua', value: 3.4 },
+        { label: 'Qui', value: 3.7 },
+        { label: 'Sex', value: 4.5 },
+        { label: 'Sab', value: 3.9 },
+        { label: 'Dom', value: 3.2 }
+      ],
+      peaks: [
+        { label: 'Sexta-feira', value: '4,5 kWh' },
+        { label: 'Sabado', value: '3,9 kWh' },
+        { label: 'Quinta-feira', value: '3,7 kWh' }
+      ],
+      insight: 'O consumo foi maior no fim da semana, com destaque para sexta-feira.'
+    },
+    month: {
+      totalKwh: 96.4,
+      estimatedCost: 60.25,
+      average: '24,1 kWh/semana',
+      peak: 'Semana 3',
+      comparison: {
+        value: 14,
+        direction: 'up',
+        text: 'Este mes esta 14% acima do mes anterior.'
+      },
+      chart: [
+        { label: 'Sem 1', value: 21.4 },
+        { label: 'Sem 2', value: 23.8 },
+        { label: 'Sem 3', value: 28.2 },
+        { label: 'Sem 4', value: 23.0 }
+      ],
+      peaks: [
+        { label: 'Semana 3', value: '28,2 kWh' },
+        { label: 'Semana 2', value: '23,8 kWh' },
+        { label: 'Semana 4', value: '23,0 kWh' }
+      ],
+      insight: 'O consumo mensal aumentou principalmente na terceira semana do mes.'
+    }
+  }
+};

@@ -1,6 +1,5 @@
 import {
   AlertCircle,
-  ChevronDown,
   ChevronRight,
   Clock3,
   FileText,
@@ -8,7 +7,6 @@ import {
   Power,
   PlugZap,
   User,
-  Wifi,
   WifiOff,
   Zap
 } from 'lucide-react-native';
@@ -55,31 +53,6 @@ export function HomeHeader({ userName }: HomeHeaderProps) {
         <User color={homePalette.primary} size={22} />
       </Pressable>
     </View>
-  );
-}
-
-export function DeviceSelectorCard({ device }: { device: HomeDevice }) {
-  const isOnline = device.status === 'online';
-
-  return (
-    <Card style={styles.deviceCard}>
-      <View style={styles.deviceIcon}>
-        <PlugZap color={homePalette.primary} size={22} />
-      </View>
-      <View style={styles.deviceContent}>
-        <View style={styles.deviceTitleRow}>
-          <Text style={styles.deviceName}>{device.name}</Text>
-          <ChevronDown color={colors.textMuted} size={18} />
-        </View>
-        <Text style={styles.deviceRoom}>{device.room}</Text>
-      </View>
-      <View style={[styles.statusPill, isOnline ? styles.onlinePill : styles.offlinePill]}>
-        {isOnline ? <Wifi color={homePalette.success} size={13} /> : <WifiOff color={colors.danger} size={13} />}
-        <Text style={[styles.statusText, isOnline ? styles.onlineText : styles.offlineText]}>
-          {isOnline ? 'Online' : 'Offline'}
-        </Text>
-      </View>
-    </Card>
   );
 }
 

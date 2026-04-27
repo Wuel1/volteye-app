@@ -1,12 +1,13 @@
 import { BarChart3, PlugZap, Zap } from 'lucide-react-native';
+import { useState } from 'react';
 import { ScrollView, View } from 'react-native';
 
+import { DeviceSelectorCard } from '../../components/DeviceSelectorCard';
 import { SummaryCard } from '../../components/SummaryCard';
 import { homeMock } from '../../data/energy';
 import {
   CurrentConsumptionCard,
   DailyConsumptionChart,
-  DeviceSelectorCard,
   EmptyDeviceState,
   HomeHeader,
   InsightCard,
@@ -23,6 +24,9 @@ const currencyFormatter = new Intl.NumberFormat('pt-BR', {
 });
 
 export function HomeScreen() {
+  const [selectedDeviceId, setSelectedDeviceId] = useState(homeMock.selectedDevice?.id);
+  const device = homeMock.devices.find((item) => item.id === selectedDeviceId) ?? homeMock.selectedDevice;
+
   if (!homeMock.selectedDevice) {
     return (
       <ScrollView contentContainerStyle={styles.content} showsVerticalScrollIndicator={false}>
@@ -32,13 +36,20 @@ export function HomeScreen() {
     );
   }
 
-  const device = homeMock.selectedDevice;
+  if (!device) {
+    return null;
+  }
+
   const isOffline = device.status === 'offline';
 
   return (
     <ScrollView contentContainerStyle={styles.content} showsVerticalScrollIndicator={false}>
       <HomeHeader userName={homeMock.userName} />
-      <DeviceSelectorCard device={device} />
+      <DeviceSelectorCard
+        devices={homeMock.devices}
+        onSelectDevice={(selectedDevice) => setSelectedDeviceId(selectedDevice.id)}
+        selectedDevice={device}
+      />
 
       {isOffline ? <OfflineState device={device} /> : null}
 
