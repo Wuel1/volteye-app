@@ -7,6 +7,7 @@ import { TabBar, TabKey } from '../components/TabBar';
 import { AuthRoutes, GeneralRoutes, PrivateRoutes } from '../constants/routes';
 import { AuthScreen } from '../screens/auth/AuthScreen';
 import { AlertsScreen } from '../screens/alerts';
+import { DevicesScreen } from '../screens/devices';
 import { HomeScreen } from '../screens/home';
 import { OnboardingScreen } from '../screens/onboarding/onboarding';
 import { ProfileScreen } from '../screens/profile';
@@ -51,7 +52,10 @@ export function AppRouter() {
         }}
       >
         {session ? (
-          <Stack.Screen component={MainScreen} name={PrivateRoutes.MAIN} />
+          <>
+            <Stack.Screen component={MainScreen} name={PrivateRoutes.MAIN} />
+            <Stack.Screen component={DevicesScreen} name={PrivateRoutes.DEVICES} />
+          </>
         ) : (
           <>
             <Stack.Screen component={OnboardingScreen} name={GeneralRoutes.ONBOARDING} />

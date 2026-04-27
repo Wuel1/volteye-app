@@ -9,13 +9,17 @@ import {
   PlugZap,
   User
 } from 'lucide-react-native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { useNavigation } from '@react-navigation/native';
 import { User as SupabaseUser } from '@supabase/supabase-js';
 import { ReactNode, useEffect, useState } from 'react';
 import { Pressable, ScrollView, Text, View } from 'react-native';
 
 import { Card } from '../../components/Card';
+import { PrivateRoutes } from '../../constants/routes';
 import { profileMock } from '../../data/energy';
 import { supabase } from '../../lib/supabase';
+import { RootStackParamList } from '../../navigation/types';
 import { colors } from '../../theme/theme';
 import { profileClasses, profilePalette } from './styles';
 
@@ -58,6 +62,7 @@ const systemItems = [
 ];
 
 export function ProfileScreen() {
+  const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
   const [isSigningOut, setIsSigningOut] = useState(false);
   const [profileUser, setProfileUser] = useState(profileMock.user);
 
@@ -100,7 +105,12 @@ export function ProfileScreen() {
 
       <ProfileSection title="Gestão de energia">
         {energyItems.map((item, index) => (
-          <ProfileRow isLast={index === energyItems.length - 1} item={item} key={item.title} />
+          <ProfileRow
+            isLast={index === energyItems.length - 1}
+            item={item}
+            key={item.title}
+            onPress={item.title === 'Minhas tomadas' ? () => navigation.navigate(PrivateRoutes.DEVICES) : undefined}
+          />
         ))}
       </ProfileSection>
 
@@ -143,7 +153,8 @@ function ProfileSection({ children, title }: { children: ReactNode; title: strin
 
 function ProfileRow({
   isLast,
-  item
+  item,
+  onPress
 }: {
   isLast: boolean;
   item: {
@@ -153,11 +164,12 @@ function ProfileRow({
     subtitle?: string;
     title: string;
   };
+  onPress?: () => void;
 }) {
   const Icon = item.Icon;
 
   return (
-    <Pressable accessibilityRole="button" className={`${profileClasses.row} ${isLast ? profileClasses.rowLast : ''}`}>
+    <Pressable accessibilityRole="button" className={`${profileClasses.row} ${isLast ? profileClasses.rowLast : ''}`} onPress={onPress}>
       <View className={profileClasses.rowIcon}>
         <Icon color={profilePalette.primary} size={19} />
       </View>

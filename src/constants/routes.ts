@@ -8,5 +8,6 @@ export const GeneralRoutes = {
 } as const;
 
 export const PrivateRoutes = {
+  DEVICES: 'Devices',
   MAIN: 'Main'
 } as const;

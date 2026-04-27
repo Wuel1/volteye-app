@@ -1,10 +1,14 @@
 import { BarChart3, PlugZap, Zap } from 'lucide-react-native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { useNavigation } from '@react-navigation/native';
 import { useState } from 'react';
 import { ScrollView, View } from 'react-native';
 
 import { DeviceSelectorCard } from '../../components/DeviceSelectorCard';
 import { SummaryCard } from '../../components/SummaryCard';
+import { PrivateRoutes } from '../../constants/routes';
 import { homeMock } from '../../data/energy';
+import { RootStackParamList } from '../../navigation/types';
 import {
   CurrentConsumptionCard,
   DailyConsumptionChart,
@@ -24,6 +28,7 @@ const currencyFormatter = new Intl.NumberFormat('pt-BR', {
 });
 
 export function HomeScreen() {
+  const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
   const [selectedDeviceId, setSelectedDeviceId] = useState(homeMock.selectedDevice?.id);
   const device = homeMock.devices.find((item) => item.id === selectedDeviceId) ?? homeMock.selectedDevice;
 
@@ -80,7 +85,7 @@ export function HomeScreen() {
       <InsightCard text={homeMock.summary.comparisonText} />
       <DailyConsumptionChart data={homeMock.chart} />
       <QuickActions />
-      <MyDevicesSection devices={homeMock.devices} />
+      <MyDevicesSection devices={homeMock.devices} onOpenDevices={() => navigation.navigate(PrivateRoutes.DEVICES)} />
     </ScrollView>
   );
 }

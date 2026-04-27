@@ -38,6 +38,7 @@ type DailyConsumptionChartProps = {
 
 type MyDevicesSectionProps = {
   devices: readonly HomeDevice[];
+  onOpenDevices?: () => void;
 };
 
 const currentConsumptionBars = [38, 52, 46, 66, 84, 58, 94];
@@ -173,29 +174,30 @@ export function QuickActions() {
   );
 }
 
-export function MyDevicesSection({ devices }: MyDevicesSectionProps) {
+export function MyDevicesSection({ devices, onOpenDevices }: MyDevicesSectionProps) {
   return (
     <View className={homeClasses.devicesSection}>
       <SectionHeader title="Minhas tomadas" />
       <View className={homeClasses.devicesList}>
         {devices.map((device) => (
-          <DeviceListItem device={device} key={device.id} />
+          <DeviceListItem device={device} key={device.id} onPress={onOpenDevices} />
         ))}
       </View>
-      <Pressable accessibilityRole="button" className={homeClasses.floatingAddButton}>
+      <Pressable accessibilityRole="button" className={homeClasses.floatingAddButton} onPress={onOpenDevices}>
         <Plus color={colors.surface} size={18} strokeWidth={2.4} />
       </Pressable>
     </View>
   );
 }
 
-function DeviceListItem({ device }: { device: HomeDevice }) {
+function DeviceListItem({ device, onPress }: { device: HomeDevice; onPress?: () => void }) {
   const isOnline = device.status === 'online';
 
   return (
     <Pressable
       accessibilityRole="button"
       className={`${homeClasses.deviceListCard} ${!isOnline ? homeClasses.deviceListCardInactive : ''}`}
+      onPress={onPress}
     >
       <View className={`${homeClasses.deviceListIcon} ${!isOnline ? homeClasses.deviceListIconInactive : ''}`}>
         {isOnline ? (

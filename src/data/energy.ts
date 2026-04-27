@@ -519,3 +519,62 @@ export const profileMock: ProfileData = {
     description: 'O VoltEye ajuda voce a entender seu consumo de energia de forma simples.'
   }
 };
+
+export type DeviceManagementStatus = 'online' | 'offline';
+
+export type ManagedDevice = {
+  id: string;
+  name: string;
+  room: string;
+  status: DeviceManagementStatus;
+  currentPowerWatts: number;
+  todayConsumptionKwh: number;
+  todayCost: number;
+  lastUpdate: string;
+  isMain: boolean;
+};
+
+export type DevicesData = {
+  summary: {
+    totalDevices: number;
+    onlineDevices: number;
+    offlineDevices: number;
+    currentTotalPowerWatts: number;
+    todayTotalCost: number;
+  };
+  devices: ManagedDevice[];
+};
+
+export const devicesMock: DevicesData = {
+  summary: {
+    totalDevices: 2,
+    onlineDevices: 1,
+    offlineDevices: 1,
+    currentTotalPowerWatts: 328,
+    todayTotalCost: 3.31
+  },
+  devices: [
+    {
+      id: '1',
+      name: 'Tomada principal',
+      room: 'Sala',
+      status: 'online',
+      currentPowerWatts: 328,
+      todayConsumptionKwh: 3.8,
+      todayCost: 2.37,
+      lastUpdate: 'Atualizado ha poucos segundos',
+      isMain: true
+    },
+    {
+      id: '2',
+      name: 'Tomada do escritorio',
+      room: 'Escritorio',
+      status: 'offline',
+      currentPowerWatts: 0,
+      todayConsumptionKwh: 1.2,
+      todayCost: 0.94,
+      lastUpdate: 'Ultima atualizacao ha 20 minutos',
+      isMain: false
+    }
+  ]
+};
