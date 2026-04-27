@@ -16,7 +16,7 @@ import {
   PeakConsumptionCard,
   QuickActions
 } from './components';
-import { homePalette, styles } from './styles';
+import { homeClasses, homePalette } from './styles';
 
 const currencyFormatter = new Intl.NumberFormat('pt-BR', {
   currency: 'BRL',
@@ -29,7 +29,7 @@ export function HomeScreen() {
 
   if (!homeMock.selectedDevice) {
     return (
-      <ScrollView contentContainerStyle={styles.content} showsVerticalScrollIndicator={false}>
+      <ScrollView contentContainerClassName={homeClasses.content} showsVerticalScrollIndicator={false}>
         <HomeHeader userName={homeMock.userName} />
         <EmptyDeviceState />
       </ScrollView>
@@ -43,7 +43,7 @@ export function HomeScreen() {
   const isOffline = device.status === 'offline';
 
   return (
-    <ScrollView contentContainerStyle={styles.content} showsVerticalScrollIndicator={false}>
+    <ScrollView contentContainerClassName={homeClasses.content} showsVerticalScrollIndicator={false}>
       <HomeHeader userName={homeMock.userName} />
       <DeviceSelectorCard
         devices={homeMock.devices}
@@ -55,7 +55,7 @@ export function HomeScreen() {
 
       <CurrentConsumptionCard device={device} statusText={homeMock.summary.statusText} />
 
-      <View style={styles.summaryGrid}>
+      <View className={homeClasses.summaryGrid}>
         <SummaryCard
           helper="Baseado no uso atual"
           icon={<Zap color={homePalette.primary} size={18} />}

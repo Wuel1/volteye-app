@@ -16,7 +16,7 @@ import { Card } from '../../components/Card';
 import { SectionHeader } from '../../components/SectionHeader';
 import { HomeDevice } from '../../data/energy';
 import { colors } from '../../theme/theme';
-import { homePalette, styles } from './styles';
+import { homeClasses, homePalette } from './styles';
 
 export type DailyConsumptionPoint = {
   label: string;
@@ -44,12 +44,12 @@ const currentConsumptionBars = [38, 52, 46, 66, 84, 58, 94];
 
 export function HomeHeader({ userName }: HomeHeaderProps) {
   return (
-    <View style={styles.header}>
-      <View style={styles.headerText}>
-        <Text style={styles.greeting}>Ola, {userName}</Text>
-        <Text style={styles.headerTitle}>Veja o consumo da sua tomada agora</Text>
+    <View className={homeClasses.header}>
+      <View className={homeClasses.headerText}>
+        <Text className={homeClasses.greeting}>Ola, {userName}</Text>
+        <Text className={homeClasses.headerTitle}>Veja o consumo da sua tomada agora</Text>
       </View>
-      <Pressable accessibilityLabel="Abrir perfil" accessibilityRole="button" style={styles.profileButton}>
+      <Pressable accessibilityLabel="Abrir perfil" accessibilityRole="button" className={homeClasses.profileButton}>
         <User color={homePalette.primary} size={22} />
       </Pressable>
     </View>
@@ -61,57 +61,56 @@ export function CurrentConsumptionCard({ device, statusText }: CurrentConsumptio
   const powerWatts = isOnline ? device.currentPowerWatts : device.lastKnownPowerWatts;
 
   return (
-    <Card style={styles.consumptionCard}>
-      <View style={styles.consumptionTop}>
+    <Card className={homeClasses.consumptionCard}>
+      <View className={homeClasses.consumptionTop}>
         <View>
-          <Text style={styles.consumptionLabel}>Consumo agora</Text>
-          <View style={styles.powerRow}>
-            <Text style={styles.powerValue}>{powerWatts}</Text>
-            <Text style={styles.powerUnit}>W</Text>
+          <Text className={homeClasses.consumptionLabel}>Consumo agora</Text>
+          <View className={homeClasses.powerRow}>
+            <Text className={homeClasses.powerValue}>{powerWatts}</Text>
+            <Text className={homeClasses.powerUnit}>W</Text>
           </View>
         </View>
-        <View style={[styles.healthPill, isOnline ? styles.healthOk : styles.healthOffline]}>
+        <View className={`${homeClasses.healthPill} ${isOnline ? homeClasses.healthOk : homeClasses.healthOffline}`}>
           {isOnline ? <Zap color={homePalette.primary} size={14} /> : <WifiOff color={colors.danger} size={14} />}
-          <Text style={[styles.healthText, !isOnline && styles.healthOfflineText]}>
+          <Text className={`${homeClasses.healthText} ${!isOnline ? homeClasses.healthOfflineText : ''}`}>
             {isOnline ? 'Estavel' : 'Ultimo dado'}
           </Text>
         </View>
       </View>
 
-      <View style={styles.miniBars}>
+      <View className={homeClasses.miniBars}>
         {currentConsumptionBars.map((height, index) => (
           <View
+            className={homeClasses.miniBar}
             key={`${height}-${index}`}
-            style={[
-              styles.miniBar,
-              {
-                backgroundColor: index === currentConsumptionBars.length - 1 ? homePalette.secondarySoft : 'rgba(255, 255, 255, 0.34)',
-                height
-              }
-            ]}
+            style={{
+              backgroundColor: index === currentConsumptionBars.length - 1 ? homePalette.secondarySoft : 'rgba(255, 255, 255, 0.34)',
+              height,
+              minHeight: 22
+            }}
           />
         ))}
       </View>
 
-      <View style={styles.consumptionFooter}>
-        <View style={styles.normalIndicator} />
-        <Text style={styles.consumptionStatus}>{isOnline ? statusText : 'Mostrando o ultimo consumo registrado'}</Text>
+      <View className={homeClasses.consumptionFooter}>
+        <View className={homeClasses.normalIndicator} />
+        <Text className={homeClasses.consumptionStatus}>{isOnline ? statusText : 'Mostrando o ultimo consumo registrado'}</Text>
       </View>
-      <Text style={styles.lastUpdate}>{isOnline ? device.lastUpdate : 'Sem atualizacao em tempo real'}</Text>
+      <Text className={homeClasses.lastUpdate}>{isOnline ? device.lastUpdate : 'Sem atualizacao em tempo real'}</Text>
     </Card>
   );
 }
 
 export function PeakConsumptionCard({ peakTime }: { peakTime: string }) {
   return (
-    <Card style={styles.infoCard}>
-      <View style={styles.infoIcon}>
+    <Card className={homeClasses.infoCard}>
+      <View className={homeClasses.infoIcon}>
         <Clock3 color={homePalette.primary} size={20} />
       </View>
-      <View style={styles.infoContent}>
-        <Text style={styles.infoLabel}>Pico de hoje</Text>
-        <Text style={styles.infoTitle}>{peakTime}</Text>
-        <Text style={styles.infoBody}>Foi o periodo em que a tomada mais consumiu energia.</Text>
+      <View className={homeClasses.infoContent}>
+        <Text className={homeClasses.infoLabel}>Pico de hoje</Text>
+        <Text className={homeClasses.infoTitle}>{peakTime}</Text>
+        <Text className={homeClasses.infoBody}>Foi o periodo em que a tomada mais consumiu energia.</Text>
       </View>
     </Card>
   );
@@ -119,10 +118,10 @@ export function PeakConsumptionCard({ peakTime }: { peakTime: string }) {
 
 export function InsightCard({ text }: { text: string }) {
   return (
-    <Card style={styles.insightCard}>
-      <Text style={styles.insightLabel}>Insight do dia</Text>
-      <Text style={styles.insightTitle}>Uso normal</Text>
-      <Text style={styles.insightBody}>{text}</Text>
+    <Card className={homeClasses.insightCard}>
+      <Text className={homeClasses.insightLabel}>Insight do dia</Text>
+      <Text className={homeClasses.insightTitle}>Uso normal</Text>
+      <Text className={homeClasses.insightBody}>{text}</Text>
     </Card>
   );
 }
@@ -131,16 +130,19 @@ export function DailyConsumptionChart({ data }: DailyConsumptionChartProps) {
   const maxChartValue = Math.max(...data.map((item) => item.value));
 
   return (
-    <Card style={styles.chartCard}>
+    <Card className={homeClasses.chartCard}>
       <SectionHeader actionLabel="kWh" title="Consumo do dia" />
-      <View style={styles.chart}>
+      <View className={homeClasses.chart}>
         {data.map((item) => (
-          <View key={item.label} style={styles.barGroup}>
-            <View style={styles.barTrack}>
-              <View style={[styles.bar, { height: `${Math.max((item.value / maxChartValue) * 100, 12)}%` }]} />
+          <View className={homeClasses.barGroup} key={item.label}>
+            <View className={homeClasses.barTrack}>
+              <View
+                className="w-full rounded-2xl bg-[#918BFF]"
+                style={{ height: `${Math.max((item.value / maxChartValue) * 100, 12)}%`, minHeight: 14 }}
+              />
             </View>
-            <Text style={styles.barValue}>{item.value.toFixed(1).replace('.', ',')}</Text>
-            <Text style={styles.barLabel}>{item.label}</Text>
+            <Text className={homeClasses.barValue}>{item.value.toFixed(1).replace('.', ',')}</Text>
+            <Text className={homeClasses.barLabel}>{item.label}</Text>
           </View>
         ))}
       </View>
@@ -155,15 +157,15 @@ export function QuickActions() {
   ];
 
   return (
-    <View style={styles.quickSection}>
+    <View className={homeClasses.quickSection}>
       <SectionHeader title="Atalhos rapidos" />
-      <View style={styles.quickGrid}>
+      <View className={homeClasses.quickGrid}>
         {actions.map(({ Icon, label }) => (
-          <Pressable accessibilityRole="button" key={label} style={styles.quickAction}>
-            <View style={styles.quickIcon}>
+          <Pressable accessibilityRole="button" className={homeClasses.quickAction} key={label}>
+            <View className={homeClasses.quickIcon}>
               <Icon color={homePalette.primary} size={18} />
             </View>
-            <Text style={styles.quickLabel}>{label}</Text>
+            <Text className={homeClasses.quickLabel}>{label}</Text>
           </Pressable>
         ))}
       </View>
@@ -173,14 +175,14 @@ export function QuickActions() {
 
 export function MyDevicesSection({ devices }: MyDevicesSectionProps) {
   return (
-    <View style={styles.devicesSection}>
+    <View className={homeClasses.devicesSection}>
       <SectionHeader title="Minhas tomadas" />
-      <View style={styles.devicesList}>
+      <View className={homeClasses.devicesList}>
         {devices.map((device) => (
           <DeviceListItem device={device} key={device.id} />
         ))}
       </View>
-      <Pressable accessibilityRole="button" style={styles.floatingAddButton}>
+      <Pressable accessibilityRole="button" className={homeClasses.floatingAddButton}>
         <Plus color={colors.surface} size={18} strokeWidth={2.4} />
       </Pressable>
     </View>
@@ -191,18 +193,21 @@ function DeviceListItem({ device }: { device: HomeDevice }) {
   const isOnline = device.status === 'online';
 
   return (
-    <Pressable accessibilityRole="button" style={[styles.deviceListCard, !isOnline && styles.deviceListCardInactive]}>
-      <View style={[styles.deviceListIcon, !isOnline && styles.deviceListIconInactive]}>
+    <Pressable
+      accessibilityRole="button"
+      className={`${homeClasses.deviceListCard} ${!isOnline ? homeClasses.deviceListCardInactive : ''}`}
+    >
+      <View className={`${homeClasses.deviceListIcon} ${!isOnline ? homeClasses.deviceListIconInactive : ''}`}>
         {isOnline ? (
           <Power color={homePalette.primary} size={20} fill={homePalette.primary} />
         ) : (
           <PlugZap color={colors.textMuted} size={20} />
         )}
       </View>
-      <View style={styles.deviceListContent}>
-        <Text style={[styles.deviceListName, !isOnline && styles.deviceListNameInactive]}>{device.name}</Text>
-        <Text style={[styles.deviceListStatus, isOnline ? styles.deviceListStatusOnline : styles.deviceListStatusOffline]}>
-          {isOnline ? `Ativa • ${device.currentPowerWatts}W` : 'Inativo • Offline'}
+      <View className={homeClasses.deviceListContent}>
+        <Text className={`${homeClasses.deviceListName} ${!isOnline ? homeClasses.deviceListNameInactive : ''}`}>{device.name}</Text>
+        <Text className={`${homeClasses.deviceListStatus} ${isOnline ? homeClasses.deviceListStatusOnline : homeClasses.deviceListStatusOffline}`}>
+          {isOnline ? `Ativa - ${device.currentPowerWatts}W` : 'Inativo - Offline'}
         </Text>
       </View>
       <ChevronRight color={colors.textMuted} size={22} />
@@ -212,17 +217,17 @@ function DeviceListItem({ device }: { device: HomeDevice }) {
 
 export function EmptyDeviceState() {
   return (
-    <Card style={styles.emptyCard}>
-      <View style={styles.emptyIcon}>
+    <Card className={homeClasses.emptyCard}>
+      <View className={homeClasses.emptyIcon}>
         <PlugZap color={homePalette.primary} size={34} />
       </View>
-      <Text style={styles.emptyTitle}>Nenhuma tomada conectada</Text>
-      <Text style={styles.emptyText}>
+      <Text className={homeClasses.emptyTitle}>Nenhuma tomada conectada</Text>
+      <Text className={homeClasses.emptyText}>
         Adicione sua primeira tomada inteligente para comecar a acompanhar seu consumo.
       </Text>
-      <Pressable accessibilityRole="button" style={styles.primaryButton}>
+      <Pressable accessibilityRole="button" className={homeClasses.primaryButton}>
         <Plus color={colors.surface} size={18} />
-        <Text style={styles.primaryButtonText}>Adicionar tomada</Text>
+        <Text className={homeClasses.primaryButtonText}>Adicionar tomada</Text>
       </Pressable>
     </Card>
   );
@@ -230,14 +235,14 @@ export function EmptyDeviceState() {
 
 export function OfflineState({ device }: { device: HomeDevice }) {
   return (
-    <Card style={styles.offlineCard}>
+    <Card className={homeClasses.offlineCard}>
       <AlertCircle color={colors.danger} size={22} />
-      <View style={styles.offlineContent}>
-        <Text style={styles.offlineTitle}>Nao conseguimos receber dados da tomada agora.</Text>
-        <Text style={styles.offlineBody}>Ultimo registro: {device.lastKnownPowerWatts} W em {device.room}.</Text>
+      <View className={homeClasses.offlineContent}>
+        <Text className={homeClasses.offlineTitle}>Nao conseguimos receber dados da tomada agora.</Text>
+        <Text className={homeClasses.offlineBody}>Ultimo registro: {device.lastKnownPowerWatts} W em {device.room}.</Text>
       </View>
-      <Pressable accessibilityRole="button" style={styles.connectionButton}>
-        <Text style={styles.connectionButtonText}>Verificar conexao</Text>
+      <Pressable accessibilityRole="button" className={homeClasses.connectionButton}>
+        <Text className={homeClasses.connectionButtonText}>Verificar conexao</Text>
         <ChevronRight color={colors.danger} size={16} />
       </Pressable>
     </Card>

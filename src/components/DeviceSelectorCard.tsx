@@ -1,8 +1,8 @@
 import { ChevronDown, PlugZap, Wifi, WifiOff } from 'lucide-react-native';
 import { useEffect, useRef, useState } from 'react';
-import { Animated, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { Animated, Text, TouchableOpacity, View } from 'react-native';
 
-import { colors, radius, spacing } from '../theme/theme';
+import { colors, spacing } from '../theme/theme';
 import { Card } from './Card';
 
 export type SelectorDevice = {
@@ -52,24 +52,24 @@ export function DeviceSelectorCard<TDevice extends SelectorDevice>({
   }
 
   return (
-    <Card style={styles.card}>
+    <Card className="gap-2 rounded-3xl border-[#E8ECFF]">
       <TouchableOpacity
         accessibilityRole="button"
         activeOpacity={0.78}
         disabled={!canOpen}
         onPress={() => setIsOpen((currentValue) => !currentValue)}
-        style={styles.selectedRow}
+        className="flex-row items-center gap-2"
       >
-        <View style={styles.deviceIcon}>
+        <View className="h-11 w-11 items-center justify-center rounded-2xl bg-[#EEF3FF]">
           <PlugZap color={palette.primary} size={22} />
         </View>
-        <View style={styles.deviceContent}>
-          <View style={styles.deviceTitleRow}>
-            <Text style={styles.deviceName}>{selectedDevice.name}</Text>
+        <View className="flex-1">
+          <View className="flex-row items-center gap-1">
+            <Text className="shrink text-[17px] font-black text-textMain">{selectedDevice.name}</Text>
             {canOpen ? (
               <Animated.View
                 style={[
-                  styles.chevron,
+                  { height: 18, width: 18 },
                   {
                     transform: [
                       {
@@ -86,11 +86,15 @@ export function DeviceSelectorCard<TDevice extends SelectorDevice>({
               </Animated.View>
             ) : null}
           </View>
-          <Text style={styles.deviceRoom}>{selectedDevice.room}</Text>
+          <Text className="mt-0.5 text-[13px] font-bold text-textMuted">{selectedDevice.room}</Text>
         </View>
-        <View style={[styles.statusPill, isOnline ? styles.onlinePill : styles.offlinePill]}>
+        <View
+          className={`flex-row items-center gap-1 rounded-full px-2 py-1 ${
+            isOnline ? 'bg-[#E9FFF5]' : 'bg-[#FFECEC]'
+          }`}
+        >
           {isOnline ? <Wifi color={palette.success} size={13} /> : <WifiOff color={colors.danger} size={13} />}
-          <Text style={[styles.statusText, isOnline ? styles.onlineText : styles.offlineText]}>
+          <Text className={`text-xs font-black ${isOnline ? 'text-[#13A36F]' : 'text-[#ba1a1a]'}`}>
             {isOnline ? 'Online' : 'Offline'}
           </Text>
         </View>
@@ -98,8 +102,8 @@ export function DeviceSelectorCard<TDevice extends SelectorDevice>({
 
       {shouldRenderDropdown ? (
         <Animated.View
+          className="gap-1 overflow-hidden border-t border-[#EEF1FF] pt-2"
           style={[
-            styles.dropdown,
             {
               maxHeight: dropdownAnimation.interpolate({
                 inputRange: [0, 1],
@@ -133,14 +137,16 @@ export function DeviceSelectorCard<TDevice extends SelectorDevice>({
                 activeOpacity={0.78}
                 key={device.id}
                 onPress={() => handleSelectDevice(device)}
-                style={[styles.option, selected && styles.optionSelected]}
+                className={`min-h-[50px] flex-row items-center gap-2 rounded-2xl px-2 py-2 ${
+                  selected ? 'bg-[#EEF3FF]' : ''
+                }`}
               >
-                <View style={[styles.optionDot, optionOnline ? styles.optionDotOnline : styles.optionDotOffline]} />
-                <View style={styles.optionContent}>
-                  <Text style={styles.optionName}>{device.name}</Text>
-                  <Text style={styles.optionRoom}>{device.room}</Text>
+                <View className={`h-2.5 w-2.5 rounded-full ${optionOnline ? 'bg-[#13A36F]' : 'bg-outlineSoft'}`} />
+                <View className="flex-1">
+                  <Text className="text-sm font-black text-textMain">{device.name}</Text>
+                  <Text className="mt-0.5 text-xs font-bold text-textMuted">{device.room}</Text>
                 </View>
-                <Text style={[styles.optionStatus, optionOnline ? styles.onlineText : styles.offlineText]}>
+                <Text className={`text-xs font-black ${optionOnline ? 'text-[#13A36F]' : 'text-[#ba1a1a]'}`}>
                   {optionOnline ? 'Online' : 'Offline'}
                 </Text>
               </TouchableOpacity>
@@ -154,123 +160,5 @@ export function DeviceSelectorCard<TDevice extends SelectorDevice>({
 
 const palette = {
   primary: '#4880FF',
-  primarySoft: '#EEF3FF',
   success: '#13A36F'
 };
-
-const styles = StyleSheet.create({
-  card: {
-    borderColor: '#E8ECFF',
-    borderRadius: radius.xl,
-    gap: spacing.sm
-  },
-  chevron: {
-    height: 18,
-    width: 18
-  },
-  deviceContent: {
-    flex: 1
-  },
-  deviceIcon: {
-    alignItems: 'center',
-    backgroundColor: palette.primarySoft,
-    borderRadius: radius.lg,
-    height: 44,
-    justifyContent: 'center',
-    width: 44
-  },
-  deviceName: {
-    color: colors.text,
-    flexShrink: 1,
-    fontSize: 17,
-    fontWeight: '900'
-  },
-  deviceRoom: {
-    color: colors.textMuted,
-    fontSize: 13,
-    fontWeight: '700',
-    marginTop: 2
-  },
-  deviceTitleRow: {
-    alignItems: 'center',
-    flexDirection: 'row',
-    gap: spacing.xs
-  },
-  dropdown: {
-    borderTopColor: '#EEF1FF',
-    borderTopWidth: 1,
-    gap: spacing.xs,
-    overflow: 'hidden',
-    paddingTop: spacing.sm
-  },
-  offlinePill: {
-    backgroundColor: '#FFECEC'
-  },
-  offlineText: {
-    color: colors.danger
-  },
-  onlinePill: {
-    backgroundColor: '#E9FFF5'
-  },
-  onlineText: {
-    color: palette.success
-  },
-  option: {
-    alignItems: 'center',
-    borderRadius: radius.lg,
-    flexDirection: 'row',
-    gap: spacing.sm,
-    minHeight: 50,
-    paddingHorizontal: spacing.sm,
-    paddingVertical: spacing.sm
-  },
-  optionContent: {
-    flex: 1
-  },
-  optionDot: {
-    borderRadius: 999,
-    height: 10,
-    width: 10
-  },
-  optionDotOffline: {
-    backgroundColor: colors.outline
-  },
-  optionDotOnline: {
-    backgroundColor: palette.success
-  },
-  optionName: {
-    color: colors.text,
-    fontSize: 14,
-    fontWeight: '900'
-  },
-  optionRoom: {
-    color: colors.textMuted,
-    fontSize: 12,
-    fontWeight: '700',
-    marginTop: 2
-  },
-  optionSelected: {
-    backgroundColor: palette.primarySoft
-  },
-  optionStatus: {
-    fontSize: 12,
-    fontWeight: '900'
-  },
-  selectedRow: {
-    alignItems: 'center',
-    flexDirection: 'row',
-    gap: spacing.sm
-  },
-  statusPill: {
-    alignItems: 'center',
-    borderRadius: 999,
-    flexDirection: 'row',
-    gap: spacing.xs,
-    paddingHorizontal: spacing.sm,
-    paddingVertical: spacing.xs
-  },
-  statusText: {
-    fontSize: 12,
-    fontWeight: '900'
-  }
-});

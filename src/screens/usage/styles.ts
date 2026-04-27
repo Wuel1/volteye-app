@@ -1,284 +1,59 @@
-import { StyleSheet } from 'react-native';
-
-import { colors, radius, spacing } from '../../theme/theme';
-
 export const usagePalette = {
   background: '#F9F8FF',
   primary: '#4880FF',
   primarySoft: '#EEF3FF',
   secondary: '#918BFF',
-  secondarySoft: '#F0ECFF',
   text: '#283351',
   success: '#13A36F',
   warning: '#FF8A3D'
 };
 
-export const styles = StyleSheet.create({
-  bar: {
-    borderRadius: radius.lg,
-    minHeight: 12,
-    width: '100%'
-  },
-  barGroup: {
-    alignItems: 'center',
-    flex: 1,
-    gap: spacing.xs
-  },
-  barLabel: {
-    color: colors.textMuted,
-    fontSize: 11,
-    fontWeight: '800',
-    textAlign: 'center'
-  },
-  barTrack: {
-    backgroundColor: usagePalette.primarySoft,
-    borderRadius: radius.lg,
-    height: 126,
-    justifyContent: 'flex-end',
-    overflow: 'hidden',
-    width: '100%'
-  },
-  barValue: {
-    color: usagePalette.text,
-    fontSize: 10,
-    fontWeight: '900'
-  },
-  cardEyebrow: {
-    color: colors.textMuted,
-    fontSize: 12,
-    fontWeight: '900',
-    textTransform: 'uppercase'
-  },
-  chart: {
-    alignItems: 'flex-end',
-    flexDirection: 'row',
-    gap: spacing.xs,
-    height: 178,
-    marginTop: spacing.md
-  },
-  chartCard: {
-    borderColor: '#E8ECFF',
-    borderRadius: radius.xl
-  },
-  comparisonBadge: {
-    fontSize: 13,
-    fontWeight: '900',
-    marginTop: spacing.xs
-  },
-  comparisonCard: {
-    alignItems: 'flex-start',
-    borderColor: '#E8ECFF',
-    borderRadius: radius.xl,
-    flexDirection: 'row',
-    gap: spacing.md
-  },
-  comparisonContent: {
-    flex: 1
-  },
-  comparisonDown: {
-    backgroundColor: '#E9FFF5'
-  },
-  comparisonDownText: {
-    color: usagePalette.success
-  },
-  comparisonIcon: {
-    alignItems: 'center',
-    borderRadius: radius.lg,
-    height: 46,
-    justifyContent: 'center',
-    width: 46
-  },
-  comparisonText: {
-    color: usagePalette.text,
-    fontSize: 16,
-    fontWeight: '800',
-    lineHeight: 22,
-    marginTop: spacing.xs
-  },
-  comparisonUp: {
-    backgroundColor: '#FFECEC'
-  },
-  comparisonUpText: {
-    color: colors.danger
-  },
-  content: {
-    backgroundColor: usagePalette.background,
-    gap: spacing.md,
-    padding: spacing.md,
-    paddingBottom: spacing.xl + 92,
-    paddingTop: spacing.lg
-  },
-  deviceLabel: {
-    color: usagePalette.primary,
-    fontSize: 13,
-    fontWeight: '900',
-    marginTop: spacing.xs
-  },
-  emptyCard: {
-    alignItems: 'center',
-    borderColor: '#E8ECFF',
-    borderRadius: radius.xl,
-    marginTop: spacing.lg,
-    paddingVertical: spacing.xl
-  },
-  emptyIcon: {
-    alignItems: 'center',
-    backgroundColor: usagePalette.primarySoft,
-    borderRadius: 999,
-    height: 72,
-    justifyContent: 'center',
-    width: 72
-  },
-  emptyText: {
-    color: colors.textMuted,
-    fontSize: 15,
-    fontWeight: '700',
-    lineHeight: 22,
-    marginTop: spacing.sm,
-    textAlign: 'center'
-  },
-  emptyTitle: {
-    color: usagePalette.text,
-    fontSize: 21,
-    fontWeight: '900',
-    marginTop: spacing.md,
-    textAlign: 'center'
-  },
-  header: {
-    gap: spacing.xs
-  },
-  insightCard: {
-    alignItems: 'flex-start',
-    backgroundColor: usagePalette.secondary,
-    borderColor: usagePalette.secondary,
-    borderRadius: radius.xl,
-    flexDirection: 'row',
-    gap: spacing.md
-  },
-  insightContent: {
-    flex: 1
-  },
-  insightIcon: {
-    alignItems: 'center',
-    backgroundColor: 'rgba(255, 255, 255, 0.18)',
-    borderRadius: radius.lg,
-    height: 46,
-    justifyContent: 'center',
-    width: 46
-  },
-  insightLabel: {
-    color: '#F0ECFF',
-    fontSize: 12,
-    fontWeight: '900',
-    textTransform: 'uppercase'
-  },
-  insightText: {
-    color: colors.surface,
-    fontSize: 16,
-    fontWeight: '800',
-    lineHeight: 23,
-    marginTop: spacing.xs
-  },
-  offlineNotice: {
-    alignItems: 'flex-start',
-    backgroundColor: '#FFF8EF',
-    borderColor: '#FFE2C4',
-    borderRadius: radius.xl,
-    flexDirection: 'row',
-    gap: spacing.sm
-  },
-  offlineNoticeBody: {
-    color: colors.textMuted,
-    fontSize: 13,
-    fontWeight: '700',
-    lineHeight: 19,
-    marginTop: 2
-  },
-  offlineNoticeText: {
-    flex: 1
-  },
-  offlineNoticeTitle: {
-    color: usagePalette.text,
-    fontSize: 15,
-    fontWeight: '900'
-  },
-  peakLabel: {
-    color: usagePalette.text,
-    flex: 1,
-    fontSize: 15,
-    fontWeight: '800'
-  },
-  peakRank: {
-    alignItems: 'center',
-    backgroundColor: usagePalette.primarySoft,
-    borderRadius: 999,
-    height: 28,
-    justifyContent: 'center',
-    width: 28
-  },
-  peakRankText: {
-    color: usagePalette.primary,
-    fontSize: 12,
-    fontWeight: '900'
-  },
-  peakRow: {
-    alignItems: 'center',
-    flexDirection: 'row',
-    gap: spacing.sm
-  },
-  peakValue: {
-    color: usagePalette.primary,
-    fontSize: 14,
-    fontWeight: '900'
-  },
-  peaksCard: {
-    borderColor: '#E8ECFF',
-    borderRadius: radius.xl
-  },
-  peaksList: {
-    gap: spacing.md,
-    marginTop: spacing.md
-  },
-  periodTab: {
-    alignItems: 'center',
-    borderRadius: radius.lg,
-    flex: 1,
-    justifyContent: 'center',
-    minHeight: 42
-  },
-  periodTabActive: {
-    backgroundColor: usagePalette.primary
-  },
-  periodTabText: {
-    color: colors.textMuted,
-    fontSize: 14,
-    fontWeight: '900'
-  },
-  periodTabTextActive: {
-    color: colors.surface
-  },
-  periodTabs: {
-    backgroundColor: colors.surface,
-    borderColor: '#E8ECFF',
-    borderRadius: radius.xl,
-    borderWidth: 1,
-    flexDirection: 'row',
-    gap: spacing.xs,
-    padding: spacing.xs
-  },
-  subtitle: {
-    color: colors.textMuted,
-    fontSize: 15,
-    fontWeight: '700',
-    lineHeight: 21
-  },
-  summaryGrid: {
-    gap: spacing.md
-  },
-  title: {
-    color: usagePalette.text,
-    fontSize: 30,
-    fontWeight: '900',
-    lineHeight: 36
-  }
-});
+export const usageClasses = {
+  barGroup: 'flex-1 items-center gap-1',
+  barLabel: 'text-center text-[11px] font-extrabold text-textMuted',
+  barTrack: 'h-[126px] w-full justify-end overflow-hidden rounded-2xl bg-[#EEF3FF]',
+  barValue: 'text-[10px] font-black text-[#283351]',
+  cardEyebrow: 'text-xs font-black uppercase text-textMuted',
+  chart: 'mt-4 h-[178px] flex-row items-end gap-1',
+  chartCard: 'rounded-3xl border-[#E8ECFF]',
+  comparisonBadge: 'mt-1 text-[13px] font-black',
+  comparisonCard: 'flex-row items-start gap-4 rounded-3xl border-[#E8ECFF]',
+  comparisonContent: 'flex-1',
+  comparisonDown: 'bg-[#E9FFF5]',
+  comparisonDownText: 'text-[#13A36F]',
+  comparisonIcon: 'h-[46px] w-[46px] items-center justify-center rounded-2xl',
+  comparisonText: 'mt-1 text-base font-extrabold leading-[22px] text-[#283351]',
+  comparisonUp: 'bg-[#FFECEC]',
+  comparisonUpText: 'text-[#ba1a1a]',
+  content: 'gap-4 bg-[#F9F8FF] p-4 pt-6 pb-[124px]',
+  deviceLabel: 'mt-1 text-[13px] font-black text-[#4880FF]',
+  emptyCard: 'mt-6 items-center rounded-3xl border-[#E8ECFF] py-8',
+  emptyIcon: 'h-[72px] w-[72px] items-center justify-center rounded-full bg-[#EEF3FF]',
+  emptyText: 'mt-2 text-center text-[15px] font-bold leading-[22px] text-textMuted',
+  emptyTitle: 'mt-4 text-center text-[21px] font-black text-[#283351]',
+  header: 'gap-1',
+  insightCard: 'flex-row items-start gap-4 rounded-3xl border-[#918BFF] bg-[#918BFF]',
+  insightContent: 'flex-1',
+  insightIcon: 'h-[46px] w-[46px] items-center justify-center rounded-2xl bg-white/20',
+  insightLabel: 'text-xs font-black uppercase text-[#F0ECFF]',
+  insightText: 'mt-1 text-base font-extrabold leading-[23px] text-surface',
+  offlineNotice: 'flex-row items-start gap-2 rounded-3xl border-[#FFE2C4] bg-[#FFF8EF]',
+  offlineNoticeBody: 'mt-0.5 text-[13px] font-bold leading-[19px] text-textMuted',
+  offlineNoticeText: 'flex-1',
+  offlineNoticeTitle: 'text-[15px] font-black text-[#283351]',
+  peakLabel: 'flex-1 text-[15px] font-extrabold text-[#283351]',
+  peakRank: 'h-7 w-7 items-center justify-center rounded-full bg-[#EEF3FF]',
+  peakRankText: 'text-xs font-black text-[#4880FF]',
+  peakRow: 'flex-row items-center gap-2',
+  peakValue: 'text-sm font-black text-[#4880FF]',
+  peaksCard: 'rounded-3xl border-[#E8ECFF]',
+  peaksList: 'mt-4 gap-4',
+  periodTab: 'min-h-[42px] flex-1 items-center justify-center rounded-2xl',
+  periodIndicator: 'absolute bottom-1 left-0 top-1 rounded-2xl bg-[#4880FF]',
+  periodTabText: 'text-sm font-black text-textMuted',
+  periodTabTextActive: 'text-white',
+  periodTabs: 'relative flex-row gap-1 rounded-3xl border border-[#E8ECFF] bg-surface p-1',
+  subtitle: 'text-[15px] font-bold leading-[21px] text-textMuted',
+  summaryGrid: 'gap-4',
+  title: 'text-[30px] font-black leading-9 text-[#283351]'
+};

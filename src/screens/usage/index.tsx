@@ -8,16 +8,17 @@ import {
   TrendingUp,
   Zap
 } from 'lucide-react-native';
-import { useMemo, useState } from 'react';
-import { Pressable, ScrollView, Text, View } from 'react-native';
+import { useEffect, useMemo, useRef, useState } from 'react';
+import { Animated, Easing, Pressable, ScrollView, Text, View } from 'react-native';
 
 import { Card } from '../../components/Card';
 import { DeviceSelectorCard } from '../../components/DeviceSelectorCard';
 import { SectionHeader } from '../../components/SectionHeader';
 import { SummaryCard } from '../../components/SummaryCard';
 import { consumptionMock, ConsumptionPeriod, ConsumptionPeriodKey } from '../../data/energy';
+import { spacing } from '../../theme/theme';
 import { colors } from '../../theme/theme';
-import { styles, usagePalette } from './styles';
+import { usageClasses, usagePalette } from './styles';
 
 const periodTabs: { key: ConsumptionPeriodKey; label: string }[] = [
   { key: 'today', label: 'Hoje' },
@@ -43,7 +44,7 @@ export function UsageScreen() {
 
   if (!device || !hasConsumptionData) {
     return (
-      <ScrollView contentContainerStyle={styles.content} showsVerticalScrollIndicator={false}>
+      <ScrollView contentContainerClassName={usageClasses.content} showsVerticalScrollIndicator={false}>
         <ConsumptionHeader />
         <EmptyConsumptionState />
       </ScrollView>
@@ -53,7 +54,7 @@ export function UsageScreen() {
   const isOffline = device.status === 'offline';
 
   return (
-    <ScrollView contentContainerStyle={styles.content} showsVerticalScrollIndicator={false}>
+    <ScrollView contentContainerClassName={usageClasses.content} showsVerticalScrollIndicator={false}>
       <ConsumptionHeader deviceLabel={`${device.name} - ${device.room}`} />
       <DeviceSelectorCard
         devices={consumptionMock.devices}
@@ -73,10 +74,10 @@ export function UsageScreen() {
 
 function ConsumptionHeader({ deviceLabel }: { deviceLabel?: string }) {
   return (
-    <View style={styles.header}>
-      <Text style={styles.title}>Consumo</Text>
-      <Text style={styles.subtitle}>Acompanhe seu historico de energia</Text>
-      {deviceLabel ? <Text style={styles.deviceLabel}>{deviceLabel}</Text> : null}
+    <View className={usageClasses.header}>
+      <Text className={usageClasses.title}>Consumo</Text>
+      <Text className={usageClasses.subtitle}>Acompanhe seu historico de energia</Text>
+      {deviceLabel ? <Text className={usageClasses.deviceLabel}>{deviceLabel}</Text> : null}
     </View>
   );
 }
@@ -88,8 +89,37 @@ function PeriodFilterTabs({
   onSelectPeriod: (period: ConsumptionPeriodKey) => void;
   selectedPeriod: ConsumptionPeriodKey;
 }) {
+  const [containerWidth, setContainerWidth] = useState(0);
+  const indicatorPosition = useRef(new Animated.Value(0)).current;
+  const selectedIndex = periodTabs.findIndex((tab) => tab.key === selectedPeriod);
+  const tabGap = spacing.xs;
+  const tabWidth = containerWidth ? (containerWidth - spacing.xs * 2 - tabGap * (periodTabs.length - 1)) / periodTabs.length : 0;
+
+  useEffect(() => {
+    if (!tabWidth) {
+      return;
+    }
+
+    Animated.timing(indicatorPosition, {
+      duration: 220,
+      easing: Easing.out(Easing.cubic),
+      toValue: spacing.xs + selectedIndex * (tabWidth + tabGap),
+      useNativeDriver: true
+    }).start();
+  }, [indicatorPosition, selectedIndex, tabGap, tabWidth]);
+
   return (
-    <View style={styles.periodTabs}>
+    <View className={usageClasses.periodTabs} onLayout={(event) => setContainerWidth(event.nativeEvent.layout.width)}>
+      {tabWidth ? (
+        <Animated.View
+          pointerEvents="none"
+          className={usageClasses.periodIndicator}
+          style={{
+            width: tabWidth,
+            transform: [{ translateX: indicatorPosition }]
+          }}
+        />
+      ) : null}
       {periodTabs.map((tab) => {
         const isActive = selectedPeriod === tab.key;
 
@@ -98,9 +128,11 @@ function PeriodFilterTabs({
             accessibilityRole="button"
             key={tab.key}
             onPress={() => onSelectPeriod(tab.key)}
-            style={[styles.periodTab, isActive && styles.periodTabActive]}
+            className={usageClasses.periodTab}
           >
-            <Text style={[styles.periodTabText, isActive && styles.periodTabTextActive]}>{tab.label}</Text>
+            <Text className={`${usageClasses.periodTabText} ${isActive ? usageClasses.periodTabTextActive : ''}`}>
+              {tab.label}
+            </Text>
           </Pressable>
         );
       })}
@@ -110,7 +142,7 @@ function PeriodFilterTabs({
 
 function ConsumptionSummaryCards({ periodData }: { periodData: ConsumptionPeriod }) {
   return (
-    <View style={styles.summaryGrid}>
+    <View className={usageClasses.summaryGrid}>
       <SummaryCard
         helper="No periodo selecionado"
         icon={<Zap color={usagePalette.primary} size={18} />}
@@ -141,27 +173,26 @@ function ConsumptionSummaryCards({ periodData }: { periodData: ConsumptionPeriod
 
 function ConsumptionChart({ maxValue, periodData }: { maxValue: number; periodData: ConsumptionPeriod }) {
   return (
-    <Card style={styles.chartCard}>
+    <Card className={usageClasses.chartCard}>
       <SectionHeader actionLabel="kWh" title="Historico do periodo" />
-      <View style={styles.chart}>
+      <View className={usageClasses.chart}>
         {periodData.chart.map((item, index) => {
           const isPeak = item.value === maxValue;
 
           return (
-            <View key={`${item.label}-${index}`} style={styles.barGroup}>
-              <View style={styles.barTrack}>
+            <View key={`${item.label}-${index}`} className={usageClasses.barGroup}>
+              <View className={usageClasses.barTrack}>
                 <View
-                  style={[
-                    styles.bar,
-                    {
-                      backgroundColor: isPeak ? usagePalette.secondary : usagePalette.primary,
-                      height: `${Math.max((item.value / maxValue) * 100, 10)}%`
-                    }
-                  ]}
+                  className="w-full rounded-2xl"
+                  style={{
+                    backgroundColor: isPeak ? usagePalette.secondary : usagePalette.primary,
+                    height: `${Math.max((item.value / maxValue) * 100, 10)}%`,
+                    minHeight: 12
+                  }}
                 />
               </View>
-              <Text style={styles.barValue}>{formatDecimal(item.value)}</Text>
-              <Text style={styles.barLabel}>{item.label}</Text>
+              <Text className={usageClasses.barValue}>{formatDecimal(item.value)}</Text>
+              <Text className={usageClasses.barLabel}>{item.label}</Text>
             </View>
           );
         })}
@@ -173,18 +204,18 @@ function ConsumptionChart({ maxValue, periodData }: { maxValue: number; periodDa
 function ComparisonCard({ periodData }: { periodData: ConsumptionPeriod }) {
   const isIncrease = periodData.comparison.direction === 'up';
   const Icon = isIncrease ? TrendingUp : TrendingDown;
-  const toneStyle = isIncrease ? styles.comparisonUp : styles.comparisonDown;
-  const textStyle = isIncrease ? styles.comparisonUpText : styles.comparisonDownText;
+  const toneClassName = isIncrease ? usageClasses.comparisonUp : usageClasses.comparisonDown;
+  const textClassName = isIncrease ? usageClasses.comparisonUpText : usageClasses.comparisonDownText;
 
   return (
-    <Card style={styles.comparisonCard}>
-      <View style={[styles.comparisonIcon, toneStyle]}>
+    <Card className={usageClasses.comparisonCard}>
+      <View className={`${usageClasses.comparisonIcon} ${toneClassName}`}>
         <Icon color={isIncrease ? colors.danger : usagePalette.success} size={22} />
       </View>
-      <View style={styles.comparisonContent}>
-        <Text style={styles.cardEyebrow}>Comparacao</Text>
-        <Text style={styles.comparisonText}>{periodData.comparison.text}</Text>
-        <Text style={[styles.comparisonBadge, textStyle]}>
+      <View className={usageClasses.comparisonContent}>
+        <Text className={usageClasses.cardEyebrow}>Comparacao</Text>
+        <Text className={usageClasses.comparisonText}>{periodData.comparison.text}</Text>
+        <Text className={`${usageClasses.comparisonBadge} ${textClassName}`}>
           {isIncrease ? 'Aumento' : 'Reducao'} de {periodData.comparison.value}%
         </Text>
       </View>
@@ -194,16 +225,16 @@ function ComparisonCard({ periodData }: { periodData: ConsumptionPeriod }) {
 
 function PeakTimesCard({ periodData }: { periodData: ConsumptionPeriod }) {
   return (
-    <Card style={styles.peaksCard}>
+    <Card className={usageClasses.peaksCard}>
       <SectionHeader title="Horarios de pico" />
-      <View style={styles.peaksList}>
+      <View className={usageClasses.peaksList}>
         {periodData.peaks.map((peak, index) => (
-          <View key={peak.label} style={styles.peakRow}>
-            <View style={styles.peakRank}>
-              <Text style={styles.peakRankText}>{index + 1}</Text>
+          <View key={peak.label} className={usageClasses.peakRow}>
+            <View className={usageClasses.peakRank}>
+              <Text className={usageClasses.peakRankText}>{index + 1}</Text>
             </View>
-            <Text style={styles.peakLabel}>{peak.label}</Text>
-            <Text style={styles.peakValue}>{peak.value}</Text>
+            <Text className={usageClasses.peakLabel}>{peak.label}</Text>
+            <Text className={usageClasses.peakValue}>{peak.value}</Text>
           </View>
         ))}
       </View>
@@ -213,13 +244,13 @@ function PeakTimesCard({ periodData }: { periodData: ConsumptionPeriod }) {
 
 function ConsumptionInsightCard({ insight }: { insight: string }) {
   return (
-    <Card style={styles.insightCard}>
-      <View style={styles.insightIcon}>
+    <Card className={usageClasses.insightCard}>
+      <View className={usageClasses.insightIcon}>
         <BarChart3 color={colors.surface} size={22} />
       </View>
-      <View style={styles.insightContent}>
-        <Text style={styles.insightLabel}>Insight simples</Text>
-        <Text style={styles.insightText}>{insight}</Text>
+      <View className={usageClasses.insightContent}>
+        <Text className={usageClasses.insightLabel}>Insight simples</Text>
+        <Text className={usageClasses.insightText}>{insight}</Text>
       </View>
     </Card>
   );
@@ -227,12 +258,12 @@ function ConsumptionInsightCard({ insight }: { insight: string }) {
 
 function EmptyConsumptionState() {
   return (
-    <Card style={styles.emptyCard}>
-      <View style={styles.emptyIcon}>
+    <Card className={usageClasses.emptyCard}>
+      <View className={usageClasses.emptyIcon}>
         <AlertCircle color={usagePalette.primary} size={32} />
       </View>
-      <Text style={styles.emptyTitle}>Ainda nao ha dados suficientes</Text>
-      <Text style={styles.emptyText}>
+      <Text className={usageClasses.emptyTitle}>Ainda nao ha dados suficientes</Text>
+      <Text className={usageClasses.emptyText}>
         Assim que a tomada comecar a enviar informacoes, seu historico aparecera aqui.
       </Text>
     </Card>
@@ -241,11 +272,11 @@ function EmptyConsumptionState() {
 
 function OfflineDeviceNotice() {
   return (
-    <Card style={styles.offlineNotice}>
+    <Card className={usageClasses.offlineNotice}>
       <AlertCircle color={colors.warning} size={20} />
-      <View style={styles.offlineNoticeText}>
-        <Text style={styles.offlineNoticeTitle}>A tomada esta offline no momento</Text>
-        <Text style={styles.offlineNoticeBody}>Os dados exibidos sao do ultimo periodo sincronizado.</Text>
+      <View className={usageClasses.offlineNoticeText}>
+        <Text className={usageClasses.offlineNoticeTitle}>A tomada esta offline no momento</Text>
+        <Text className={usageClasses.offlineNoticeBody}>Os dados exibidos sao do ultimo periodo sincronizado.</Text>
       </View>
     </Card>
   );

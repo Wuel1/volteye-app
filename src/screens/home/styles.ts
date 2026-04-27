@@ -1,7 +1,3 @@
-import { StyleSheet } from 'react-native';
-
-import { colors, radius, spacing } from '../../theme/theme';
-
 export const homePalette = {
   background: '#F9F8FF',
   primary: '#4880FF',
@@ -13,502 +9,75 @@ export const homePalette = {
   warning: '#FF8A3D'
 };
 
-export const styles = StyleSheet.create({
-  bar: {
-    backgroundColor: homePalette.secondary,
-    borderRadius: radius.lg,
-    minHeight: 14,
-    width: '100%'
-  },
-  barGroup: {
-    alignItems: 'center',
-    flex: 1,
-    gap: spacing.xs
-  },
-  barLabel: {
-    color: colors.textMuted,
-    fontSize: 12,
-    fontWeight: '800'
-  },
-  barTrack: {
-    backgroundColor: homePalette.primarySoft,
-    borderRadius: radius.lg,
-    height: 120,
-    justifyContent: 'flex-end',
-    overflow: 'hidden',
-    width: '100%'
-  },
-  barValue: {
-    color: homePalette.primaryDeep,
-    fontSize: 11,
-    fontWeight: '900'
-  },
-  chart: {
-    alignItems: 'flex-end',
-    flexDirection: 'row',
-    gap: spacing.sm,
-    height: 172,
-    marginTop: spacing.md
-  },
-  chartCard: {
-    borderColor: '#E8ECFF',
-    borderRadius: radius.xl
-  },
-  connectionButton: {
-    alignItems: 'center',
-    alignSelf: 'flex-start',
-    flexDirection: 'row',
-    gap: spacing.xs,
-    marginTop: spacing.xs
-  },
-  connectionButtonText: {
-    color: colors.danger,
-    fontSize: 13,
-    fontWeight: '900'
-  },
-  consumptionCard: {
-    backgroundColor: homePalette.primary,
-    borderColor: homePalette.primary,
-    borderRadius: radius.xl,
-    overflow: 'hidden'
-  },
-  consumptionFooter: {
-    alignItems: 'center',
-    flexDirection: 'row',
-    gap: spacing.sm,
-    marginTop: spacing.lg
-  },
-  consumptionLabel: {
-    color: '#EAF0FF',
-    fontSize: 13,
-    fontWeight: '900',
-    textTransform: 'uppercase'
-  },
-  consumptionStatus: {
-    color: colors.surface,
-    flex: 1,
-    fontSize: 15,
-    fontWeight: '900'
-  },
-  consumptionTop: {
-    alignItems: 'flex-start',
-    flexDirection: 'row',
-    justifyContent: 'space-between'
-  },
-  content: {
-    backgroundColor: homePalette.background,
-    gap: spacing.md,
-    padding: spacing.md,
-    paddingBottom: spacing.xl + 92,
-    paddingTop: spacing.lg
-  },
-  deviceCard: {
-    alignItems: 'center',
-    borderColor: '#E8ECFF',
-    borderRadius: radius.xl,
-    flexDirection: 'row',
-    gap: spacing.sm
-  },
-  deviceContent: {
-    flex: 1
-  },
-  deviceIcon: {
-    alignItems: 'center',
-    backgroundColor: homePalette.primarySoft,
-    borderRadius: radius.lg,
-    height: 44,
-    justifyContent: 'center',
-    width: 44
-  },
-  deviceName: {
-    color: homePalette.primaryDeep,
-    flexShrink: 1,
-    fontSize: 17,
-    fontWeight: '900'
-  },
-  deviceRoom: {
-    color: colors.textMuted,
-    fontSize: 13,
-    fontWeight: '700',
-    marginTop: 2
-  },
-  deviceTitleRow: {
-    alignItems: 'center',
-    flexDirection: 'row',
-    gap: spacing.xs
-  },
-  deviceListCard: {
-    alignItems: 'center',
-    backgroundColor: colors.surface,
-    borderColor: '#EEF1FF',
-    borderRadius: radius.xl,
-    borderWidth: 1,
-    flexDirection: 'row',
-    gap: spacing.md,
-    minHeight: 78,
-    padding: spacing.md,
-    shadowColor: homePalette.primary,
-    shadowOffset: { width: 0, height: 8 },
-    shadowOpacity: 0.06,
-    shadowRadius: 14,
-    elevation: 1
-  },
-  deviceListCardInactive: {
-    opacity: 0.58
-  },
-  deviceListContent: {
-    flex: 1
-  },
-  deviceListIcon: {
-    alignItems: 'center',
-    backgroundColor: homePalette.primarySoft,
-    borderRadius: 999,
-    height: 48,
-    justifyContent: 'center',
-    width: 48
-  },
-  deviceListIconInactive: {
-    backgroundColor: '#EEF0F7'
-  },
-  deviceListName: {
-    color: homePalette.primaryDeep,
-    fontSize: 16,
-    fontWeight: '900'
-  },
-  deviceListNameInactive: {
-    color: colors.textMuted
-  },
-  deviceListStatus: {
-    fontSize: 13,
-    fontWeight: '900',
-    marginTop: 2
-  },
-  deviceListStatusOffline: {
-    color: colors.textMuted
-  },
-  deviceListStatusOnline: {
-    color: homePalette.success
-  },
-  devicesList: {
-    gap: spacing.md
-  },
-  devicesSection: {
-    gap: spacing.md,
-    position: 'relative'
-  },
-  emptyCard: {
-    alignItems: 'center',
-    borderColor: '#E8ECFF',
-    borderRadius: radius.xl,
-    marginTop: spacing.lg,
-    paddingVertical: spacing.xl
-  },
-  floatingAddButton: {
-    alignItems: 'center',
-    backgroundColor: homePalette.secondary,
-    borderRadius: radius.md,
-    bottom: spacing.md,
-    height: 38,
-    justifyContent: 'center',
-    position: 'absolute',
-    right: spacing.md,
-    shadowColor: homePalette.secondary,
-    shadowOffset: { width: 0, height: 6 },
-    shadowOpacity: 0.2,
-    shadowRadius: 10,
-    width: 38,
-    elevation: 3
-  },
-  emptyIcon: {
-    alignItems: 'center',
-    backgroundColor: homePalette.primarySoft,
-    borderRadius: 999,
-    height: 76,
-    justifyContent: 'center',
-    width: 76
-  },
-  emptyText: {
-    color: colors.textMuted,
-    fontSize: 15,
-    fontWeight: '700',
-    lineHeight: 22,
-    marginTop: spacing.sm,
-    maxWidth: 280,
-    textAlign: 'center'
-  },
-  emptyTitle: {
-    color: homePalette.primaryDeep,
-    fontSize: 22,
-    fontWeight: '900',
-    marginTop: spacing.md,
-    textAlign: 'center'
-  },
-  greeting: {
-    color: colors.textMuted,
-    fontSize: 14,
-    fontWeight: '700'
-  },
-  healthOffline: {
-    backgroundColor: '#FFECEC'
-  },
-  healthOfflineText: {
-    color: colors.danger
-  },
-  healthOk: {
-    backgroundColor: colors.surface
-  },
-  healthPill: {
-    alignItems: 'center',
-    backgroundColor: colors.surface,
-    borderRadius: 999,
-    flexDirection: 'row',
-    gap: spacing.xs,
-    paddingHorizontal: spacing.sm,
-    paddingVertical: spacing.xs
-  },
-  healthText: {
-    color: homePalette.primary,
-    fontSize: 12,
-    fontWeight: '900'
-  },
-  header: {
-    alignItems: 'center',
-    flexDirection: 'row',
-    gap: spacing.md,
-    justifyContent: 'space-between'
-  },
-  headerText: {
-    flex: 1
-  },
-  headerTitle: {
-    color: homePalette.primaryDeep,
-    fontSize: 26,
-    fontWeight: '900',
-    lineHeight: 31,
-    marginTop: spacing.xs
-  },
-  infoBody: {
-    color: colors.textMuted,
-    fontSize: 13,
-    fontWeight: '700',
-    lineHeight: 19,
-    marginTop: spacing.xs
-  },
-  infoCard: {
-    alignItems: 'flex-start',
-    borderColor: '#E8ECFF',
-    borderLeftColor: homePalette.primary,
-    borderLeftWidth: 4,
-    borderRadius: radius.xl,
-    flexDirection: 'row',
-    gap: spacing.md
-  },
-  infoContent: {
-    flex: 1
-  },
-  infoIcon: {
-    alignItems: 'center',
-    backgroundColor: homePalette.primarySoft,
-    borderRadius: radius.lg,
-    height: 44,
-    justifyContent: 'center',
-    width: 44
-  },
-  infoLabel: {
-    color: colors.textMuted,
-    fontSize: 12,
-    fontWeight: '900',
-    textTransform: 'uppercase'
-  },
-  infoTitle: {
-    color: homePalette.primaryDeep,
-    fontSize: 18,
-    fontWeight: '900',
-    marginTop: 2
-  },
-  insightBody: {
-    color: '#F6F3FF',
-    fontSize: 14,
-    fontWeight: '700',
-    lineHeight: 21,
-    marginTop: spacing.xs
-  },
-  insightCard: {
-    backgroundColor: homePalette.secondary,
-    borderColor: homePalette.secondary,
-    borderRadius: radius.xl
-  },
-  insightLabel: {
-    color: '#F0ECFF',
-    fontSize: 12,
-    fontWeight: '900',
-    textTransform: 'uppercase'
-  },
-  insightTitle: {
-    color: colors.surface,
-    fontSize: 20,
-    fontWeight: '900',
-    marginTop: spacing.xs
-  },
-  lastUpdate: {
-    color: '#EAF0FF',
-    fontSize: 13,
-    fontWeight: '700',
-    marginTop: spacing.xs
-  },
-  miniBar: {
-    borderRadius: radius.md,
-    flex: 1,
-    minHeight: 22
-  },
-  miniBars: {
-    alignItems: 'flex-end',
-    flexDirection: 'row',
-    gap: spacing.sm,
-    height: 104,
-    marginTop: spacing.lg
-  },
-  normalIndicator: {
-    backgroundColor: '#A8FFD8',
-    borderRadius: 999,
-    height: 10,
-    width: 10
-  },
-  offlineBody: {
-    color: colors.textMuted,
-    fontSize: 13,
-    fontWeight: '700',
-    lineHeight: 19
-  },
-  offlineCard: {
-    alignItems: 'flex-start',
-    backgroundColor: '#FFF6F6',
-    borderColor: '#FFDADA',
-    borderRadius: radius.xl,
-    gap: spacing.sm
-  },
-  offlineContent: {
-    gap: spacing.xs
-  },
-  offlinePill: {
-    backgroundColor: '#FFECEC'
-  },
-  offlineText: {
-    color: colors.danger
-  },
-  offlineTitle: {
-    color: homePalette.primaryDeep,
-    fontSize: 16,
-    fontWeight: '900',
-    lineHeight: 22
-  },
-  onlinePill: {
-    backgroundColor: '#E9FFF5'
-  },
-  onlineText: {
-    color: homePalette.success
-  },
-  powerRow: {
-    alignItems: 'flex-end',
-    flexDirection: 'row',
-    marginTop: spacing.xs
-  },
-  powerUnit: {
-    color: '#EAF0FF',
-    fontSize: 18,
-    fontWeight: '900',
-    marginBottom: 9,
-    marginLeft: spacing.xs
-  },
-  powerValue: {
-    color: colors.surface,
-    fontSize: 58,
-    fontWeight: '900',
-    lineHeight: 64
-  },
-  primaryButton: {
-    alignItems: 'center',
-    backgroundColor: homePalette.primary,
-    borderRadius: radius.lg,
-    flexDirection: 'row',
-    gap: spacing.sm,
-    marginTop: spacing.lg,
-    paddingHorizontal: spacing.lg,
-    paddingVertical: spacing.md
-  },
-  primaryButtonText: {
-    color: colors.surface,
-    fontSize: 15,
-    fontWeight: '900'
-  },
-  profileButton: {
-    alignItems: 'center',
-    backgroundColor: colors.surface,
-    borderColor: '#E5EAFF',
-    borderRadius: 999,
-    borderWidth: 1,
-    height: 48,
-    justifyContent: 'center',
-    shadowColor: homePalette.primary,
-    shadowOffset: { width: 0, height: 8 },
-    shadowOpacity: 0.1,
-    shadowRadius: 16,
-    width: 48,
-    elevation: 2
-  },
-  quickAction: {
-    alignItems: 'center',
-    backgroundColor: colors.surface,
-    borderColor: '#E8ECFF',
-    borderRadius: radius.lg,
-    borderWidth: 1,
-    flexBasis: '46%',
-    flexDirection: 'row',
-    flexGrow: 1,
-    gap: spacing.sm,
-    minHeight: 64,
-    padding: spacing.md,
-    shadowColor: homePalette.primary,
-    shadowOffset: { width: 0, height: 8 },
-    shadowOpacity: 0.06,
-    shadowRadius: 14,
-    elevation: 1
-  },
-  quickGrid: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    gap: spacing.md
-  },
-  quickIcon: {
-    alignItems: 'center',
-    backgroundColor: homePalette.primarySoft,
-    borderRadius: radius.md,
-    height: 34,
-    justifyContent: 'center',
-    width: 34
-  },
-  quickLabel: {
-    color: homePalette.primaryDeep,
-    flex: 1,
-    fontSize: 13,
-    fontWeight: '900'
-  },
-  quickSection: {
-    gap: spacing.md
-  },
-  statusPill: {
-    alignItems: 'center',
-    borderRadius: 999,
-    flexDirection: 'row',
-    gap: spacing.xs,
-    paddingHorizontal: spacing.sm,
-    paddingVertical: spacing.xs
-  },
-  statusText: {
-    fontSize: 12,
-    fontWeight: '900'
-  },
-  summaryGrid: {
-    gap: spacing.md
-  }
-});
+export const homeClasses = {
+  barGroup: 'flex-1 items-center gap-1',
+  barLabel: 'text-xs font-extrabold text-textMuted',
+  barTrack: 'h-[120px] w-full justify-end overflow-hidden rounded-2xl bg-[#EEF3FF]',
+  barValue: 'text-[11px] font-black text-[#283351]',
+  chart: 'mt-4 h-[172px] flex-row items-end gap-2',
+  chartCard: 'rounded-3xl border-[#E8ECFF]',
+  connectionButton: 'mt-1 flex-row items-center gap-1 self-start',
+  connectionButtonText: 'text-[13px] font-black text-[#ba1a1a]',
+  consumptionCard: 'overflow-hidden rounded-3xl border-[#4880FF] bg-[#4880FF]',
+  consumptionFooter: 'mt-6 flex-row items-center gap-2',
+  consumptionLabel: 'text-[13px] font-black uppercase text-[#EAF0FF]',
+  consumptionStatus: 'flex-1 text-[15px] font-black text-surface',
+  consumptionTop: 'flex-row items-start justify-between',
+  content: 'gap-4 bg-[#F9F8FF] p-4 pt-6 pb-[124px]',
+  deviceListCard: 'min-h-[78px] flex-row items-center gap-4 rounded-3xl border border-[#EEF1FF] bg-surface p-4 shadow-sm',
+  deviceListCardInactive: 'opacity-60',
+  deviceListContent: 'flex-1',
+  deviceListIcon: 'h-12 w-12 items-center justify-center rounded-full bg-[#EEF3FF]',
+  deviceListIconInactive: 'bg-[#EEF0F7]',
+  deviceListName: 'text-base font-black text-[#283351]',
+  deviceListNameInactive: 'text-textMuted',
+  deviceListStatus: 'mt-0.5 text-[13px] font-black',
+  deviceListStatusOffline: 'text-textMuted',
+  deviceListStatusOnline: 'text-[#13A36F]',
+  devicesList: 'gap-4',
+  devicesSection: 'relative gap-4',
+  emptyCard: 'mt-6 items-center rounded-3xl border-[#E8ECFF] py-8',
+  emptyIcon: 'h-[76px] w-[76px] items-center justify-center rounded-full bg-[#EEF3FF]',
+  emptyText: 'mt-2 max-w-[280px] text-center text-[15px] font-bold leading-[22px] text-textMuted',
+  emptyTitle: 'mt-4 text-center text-[22px] font-black text-[#283351]',
+  floatingAddButton: 'absolute bottom-4 right-4 h-[38px] w-[38px] items-center justify-center rounded-control bg-[#918BFF] shadow-md',
+  greeting: 'text-sm font-bold text-textMuted',
+  healthOffline: 'bg-[#FFECEC]',
+  healthOfflineText: 'text-[#ba1a1a]',
+  healthOk: 'bg-surface',
+  healthPill: 'flex-row items-center gap-1 rounded-full px-2 py-1',
+  healthText: 'text-xs font-black text-[#4880FF]',
+  header: 'flex-row items-center justify-between gap-4',
+  headerText: 'flex-1',
+  headerTitle: 'mt-1 text-[26px] font-black leading-[31px] text-[#283351]',
+  infoBody: 'mt-1 text-[13px] font-bold leading-[19px] text-textMuted',
+  infoCard: 'flex-row items-start gap-4 rounded-3xl border-[#E8ECFF] border-l-4 border-l-[#4880FF]',
+  infoContent: 'flex-1',
+  infoIcon: 'h-11 w-11 items-center justify-center rounded-2xl bg-[#EEF3FF]',
+  infoLabel: 'text-xs font-black uppercase text-textMuted',
+  infoTitle: 'mt-0.5 text-lg font-black text-[#283351]',
+  insightBody: 'mt-1 text-sm font-bold leading-[21px] text-[#F6F3FF]',
+  insightCard: 'rounded-3xl border-[#918BFF] bg-[#918BFF]',
+  insightLabel: 'text-xs font-black uppercase text-[#F0ECFF]',
+  insightTitle: 'mt-1 text-xl font-black text-surface',
+  lastUpdate: 'mt-1 text-[13px] font-bold text-[#EAF0FF]',
+  miniBar: 'flex-1 rounded-lg',
+  miniBars: 'mt-6 h-[104px] flex-row items-end gap-2',
+  normalIndicator: 'h-2.5 w-2.5 rounded-full bg-[#A8FFD8]',
+  offlineBody: 'text-[13px] font-bold leading-[19px] text-textMuted',
+  offlineCard: 'items-start gap-2 rounded-3xl border-[#FFDADA] bg-[#FFF6F6]',
+  offlineContent: 'gap-1',
+  offlineTitle: 'text-base font-black leading-[22px] text-[#283351]',
+  powerRow: 'mt-1 flex-row items-end',
+  powerUnit: 'mb-[9px] ml-1 text-lg font-black text-[#EAF0FF]',
+  powerValue: 'text-[58px] font-black leading-[64px] text-surface',
+  primaryButton: 'mt-6 flex-row items-center gap-2 rounded-2xl bg-[#4880FF] px-6 py-4',
+  primaryButtonText: 'text-[15px] font-black text-surface',
+  profileButton: 'h-12 w-12 items-center justify-center rounded-full border border-[#E5EAFF] bg-surface shadow-sm',
+  quickAction: 'min-h-16 flex-1 basis-[46%] flex-row items-center gap-2 rounded-2xl border border-[#E8ECFF] bg-surface p-4 shadow-sm',
+  quickGrid: 'flex-row flex-wrap gap-4',
+  quickIcon: 'h-[34px] w-[34px] items-center justify-center rounded-control bg-[#EEF3FF]',
+  quickLabel: 'flex-1 text-[13px] font-black text-[#283351]',
+  quickSection: 'gap-4',
+  summaryGrid: 'gap-4'
+};
