@@ -7,7 +7,7 @@ import { TabBar, TabKey } from '../components/TabBar';
 import { AuthRoutes, GeneralRoutes, PrivateRoutes } from '../constants/routes';
 import { AuthScreen } from '../screens/auth/AuthScreen';
 import { AlertsScreen } from '../screens/AlertsScreen';
-import { HomeScreen } from '../screens/HomeScreen';
+import { HomeScreen } from '../screens/home';
 import { OnboardingScreen } from '../screens/onboarding/onboarding';
 import { ProfileScreen } from '../screens/ProfileScreen';
 import { RegisterScreen } from '../screens/register/RegisterScreen';
