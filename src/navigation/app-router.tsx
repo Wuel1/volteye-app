@@ -9,7 +9,7 @@ import { AuthScreen } from '../screens/auth/AuthScreen';
 import { AlertsScreen } from '../screens/alerts';
 import { HomeScreen } from '../screens/home';
 import { OnboardingScreen } from '../screens/onboarding/onboarding';
-import { ProfileScreen } from '../screens/ProfileScreen';
+import { ProfileScreen } from '../screens/profile';
 import { RegisterScreen } from '../screens/register/RegisterScreen';
 import { UsageScreen } from '../screens/usage';
 import { colors } from '../theme/theme';

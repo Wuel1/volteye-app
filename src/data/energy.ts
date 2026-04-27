@@ -463,3 +463,59 @@ export const alertsMock: AlertsData = {
     }
   ]
 };
+
+export type ProfileData = {
+  user: {
+    name: string;
+    email: string;
+    initials: string;
+  };
+  location: {
+    id: string;
+    name: string;
+    type: string;
+    devicesCount: number;
+    connectedDevicesCount: number;
+  };
+  energyTariff: {
+    value: number | null;
+    unit: string;
+    configured: boolean;
+  };
+  notifications: {
+    enabled: boolean;
+    alertsEnabled: boolean;
+  };
+  app: {
+    version: string;
+    description: string;
+  };
+};
+
+export const profileMock: ProfileData = {
+  user: {
+    name: 'Wandson Emanuel',
+    email: 'wandson@email.com',
+    initials: 'WE'
+  },
+  location: {
+    id: '1',
+    name: 'Minha casa',
+    type: 'Residencia',
+    devicesCount: 1,
+    connectedDevicesCount: 1
+  },
+  energyTariff: {
+    value: 0.78,
+    unit: 'kWh',
+    configured: true
+  },
+  notifications: {
+    enabled: true,
+    alertsEnabled: true
+  },
+  app: {
+    version: '1.0.0',
+    description: 'O VoltEye ajuda voce a entender seu consumo de energia de forma simples.'
+  }
+};
