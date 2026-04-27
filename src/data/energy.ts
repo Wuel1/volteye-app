@@ -259,3 +259,207 @@ export const consumptionMock: ConsumptionData = {
     }
   }
 };
+
+export type AlertFilterKey = 'all' | 'important' | 'consumption' | 'connection';
+
+export type AlertType =
+  | 'constant_consumption'
+  | 'daily_cost'
+  | 'high_consumption'
+  | 'long_usage'
+  | 'offline'
+  | 'peak_detected';
+
+export type AlertSeverity = 'high' | 'medium' | 'low';
+
+export type AlertStatus = 'new' | 'seen' | 'resolved';
+
+export type AlertCategory = 'consumption' | 'connection';
+
+export type AlertItem = {
+  id: string;
+  type: AlertType;
+  title: string;
+  deviceName: string;
+  room: string;
+  date: string;
+  description: string;
+  detail: string;
+  explanation: string;
+  recommendation: string;
+  severity: AlertSeverity;
+  status: AlertStatus;
+  category: AlertCategory;
+};
+
+export type AlertsData = {
+  selectedDevice: {
+    id: string;
+    name: string;
+    room: string;
+    status: HomeDeviceStatus;
+  } | null;
+  devices: {
+    id: string;
+    name: string;
+    room: string;
+    status: HomeDeviceStatus;
+  }[];
+  summary: {
+    activeAlerts: number;
+    weeklyEvents: number;
+    generalStatus: string;
+  };
+  recommendation: {
+    title: string;
+    description: string;
+    actionLabel: string;
+  };
+  highlightedAlert: {
+    id: string;
+    type: AlertType;
+    title: string;
+    deviceName: string;
+    date: string;
+    description: string;
+    severity: AlertSeverity;
+    status: AlertStatus;
+  } | null;
+  alerts: AlertItem[];
+};
+
+export const alertsMock: AlertsData = {
+  selectedDevice: {
+    id: '1',
+    name: 'Tomada principal',
+    room: 'Sala',
+    status: 'online'
+  },
+  devices: [
+    {
+      id: '1',
+      name: 'Tomada principal',
+      room: 'Sala',
+      status: 'online'
+    },
+    {
+      id: '2',
+      name: 'Geladeira cozinha',
+      room: 'Cozinha',
+      status: 'offline'
+    }
+  ],
+  summary: {
+    activeAlerts: 2,
+    weeklyEvents: 5,
+    generalStatus: 'Tomada principal online'
+  },
+  recommendation: {
+    title: 'Recomendacao inteligente',
+    description:
+      'Voce tem 4 alertas nao criticos. Com base no seu uso, sugerimos ativar o modo Eco para reduzir consumo em espera.',
+    actionLabel: 'Aplicar ajuste'
+  },
+  highlightedAlert: {
+    id: 'alert-1',
+    type: 'high_consumption',
+    title: 'Atencao ao consumo de hoje',
+    deviceName: 'Tomada principal',
+    date: 'Hoje, 19:42',
+    description: 'Sua tomada esta consumindo acima do padrao para este horario.',
+    severity: 'high',
+    status: 'new'
+  },
+  alerts: [
+    {
+      id: 'alert-1',
+      type: 'high_consumption',
+      title: 'Consumo acima do padrao',
+      deviceName: 'Tomada principal',
+      room: 'Sala',
+      date: 'Hoje, 19:42',
+      description: 'A tomada consumiu 42% acima da media para este horario.',
+      detail: 'Hoje, entre 18h e 20h, a Tomada principal consumiu 42% acima da media registrada nesse mesmo horario.',
+      explanation: 'Isso pode acontecer quando o equipamento conectado fica mais tempo ligado ou trabalha em maior potencia.',
+      recommendation: 'Verifique se o equipamento conectado precisa permanecer ligado por tanto tempo.',
+      severity: 'high',
+      status: 'new',
+      category: 'consumption'
+    },
+    {
+      id: 'alert-2',
+      type: 'long_usage',
+      title: 'Tomada ligada por muito tempo',
+      deviceName: 'Tomada principal',
+      room: 'Sala',
+      date: 'Hoje, 16:10',
+      description: 'A tomada ficou ativa por mais de 6 horas seguidas.',
+      detail: 'A Tomada principal permaneceu ativa por mais de 6 horas sem interrupcao relevante no consumo.',
+      explanation: 'Esse comportamento pode indicar que o equipamento ficou ligado mesmo quando nao estava em uso.',
+      recommendation: 'Considere desligar o equipamento quando ele nao estiver em uso.',
+      severity: 'medium',
+      status: 'new',
+      category: 'consumption'
+    },
+    {
+      id: 'alert-3',
+      type: 'peak_detected',
+      title: 'Pico de consumo detectado',
+      deviceName: 'Tomada principal',
+      room: 'Sala',
+      date: 'Ontem, 20:05',
+      description: 'O maior pico de consumo ocorreu entre 18h e 20h.',
+      detail: 'O maior pico do dia aconteceu entre 18h e 20h, periodo em que a tomada concentrou mais energia.',
+      explanation: 'Picos podem acontecer quando o equipamento exige mais potencia em um curto intervalo.',
+      recommendation: 'Acompanhe se esse padrao se repete nos proximos dias.',
+      severity: 'medium',
+      status: 'seen',
+      category: 'consumption'
+    },
+    {
+      id: 'alert-4',
+      type: 'offline',
+      title: 'Dispositivo offline',
+      deviceName: 'Tomada principal',
+      room: 'Sala',
+      date: 'Ontem, 08:15',
+      description: 'Nao recebemos dados da tomada durante 20 minutos.',
+      detail: 'A Tomada principal ficou sem enviar dados por cerca de 20 minutos.',
+      explanation: 'Isso costuma acontecer por instabilidade no Wi-Fi, distancia do roteador ou queda temporaria de energia.',
+      recommendation: 'Verifique a conexao Wi-Fi caso o problema volte a acontecer.',
+      severity: 'low',
+      status: 'resolved',
+      category: 'connection'
+    },
+    {
+      id: 'alert-5',
+      type: 'daily_cost',
+      title: 'Custo diario acima do esperado',
+      deviceName: 'Tomada principal',
+      room: 'Sala',
+      date: 'Segunda, 21:30',
+      description: 'O custo estimado do dia passou da media dos ultimos 7 dias.',
+      detail: 'O custo estimado de hoje ficou acima da media registrada nos ultimos dias para esta tomada.',
+      explanation: 'Esse aumento pode estar ligado a mais tempo de uso ou a um periodo com maior potencia.',
+      recommendation: 'Veja o historico para identificar em qual horario o consumo aumentou.',
+      severity: 'medium',
+      status: 'seen',
+      category: 'consumption'
+    },
+    {
+      id: 'alert-6',
+      type: 'constant_consumption',
+      title: 'Consumo constante na madrugada',
+      deviceName: 'Tomada principal',
+      room: 'Sala',
+      date: 'Domingo, 03:20',
+      description: 'A tomada manteve consumo baixo, mas continuo, durante a madrugada.',
+      detail: 'Durante a madrugada, a tomada registrou consumo constante por algumas horas.',
+      explanation: 'Isso pode indicar modo standby ou algum equipamento que continuou funcionando em baixa potencia.',
+      recommendation: 'Confira se o equipamento precisa ficar conectado durante a noite.',
+      severity: 'low',
+      status: 'seen',
+      category: 'consumption'
+    }
+  ]
+};
