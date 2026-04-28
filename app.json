@@ -21,11 +21,17 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/volteye-logo.png",
         "backgroundColor": "#faf8ff"
-      }
+      },
+      "package": "com.wuel1.volteyemobile"
     },
     "web": {
       "bundler": "metro",
       "favicon": "./assets/volteye-logo.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "59af84d3-13dd-46a6-880f-a1c5cfdaaa19"
+      }
     }
   }
 }
