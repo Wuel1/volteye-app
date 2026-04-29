@@ -1,7 +1,7 @@
 import { Pressable, Text, View } from 'react-native';
 
 import { DeviceManagementStatus } from '../../../data/energy';
-import { devicesClasses } from '../styles';
+import { devicesClasses, devicesPalette } from '../styles';
 
 export type DeviceFilterKey = 'all' | DeviceManagementStatus;
 
@@ -26,11 +26,19 @@ export function DevicesFilterTabs({
         return (
           <Pressable
             accessibilityRole="button"
-            className={`${devicesClasses.filterChip} ${isActive ? devicesClasses.filterChipActive : ''}`}
+            className={devicesClasses.filterChip}
             key={filter.key}
             onPress={() => onSelectFilter(filter.key)}
+            style={
+              isActive
+                ? {
+                    backgroundColor: devicesPalette.primary,
+                    borderColor: devicesPalette.primary
+                  }
+                : undefined
+            }
           >
-            <Text className={`${devicesClasses.filterChipText} ${isActive ? devicesClasses.filterChipTextActive : ''}`}>
+            <Text className={devicesClasses.filterChipText} style={isActive ? { color: '#FFFFFF' } : undefined}>
               {filter.label}
             </Text>
           </Pressable>

@@ -2,7 +2,7 @@ import { useEffect, useRef } from 'react';
 import { Animated, Pressable, Text, View } from 'react-native';
 
 import { AlertFilterKey } from '../../../data/energy';
-import { alertsClasses } from '../styles';
+import { alertsClasses, alertsPalette } from '../styles';
 
 const filterTabs: { key: AlertFilterKey; label: string }[] = [
   { key: 'all', label: 'Todos' },
@@ -72,10 +72,18 @@ function AlertFilterChip({
     >
       <Pressable
         accessibilityRole="button"
-        className={`${alertsClasses.filterChip} ${isActive ? alertsClasses.filterChipActive : ''}`}
+        className={alertsClasses.filterChip}
         onPress={onPress}
+        style={
+          isActive
+            ? {
+                backgroundColor: alertsPalette.primary,
+                borderColor: alertsPalette.primary
+              }
+            : undefined
+        }
       >
-        <Text className={`${alertsClasses.filterChipText} ${isActive ? alertsClasses.filterChipTextActive : ''}`}>
+        <Text className={alertsClasses.filterChipText} style={isActive ? { color: '#FFFFFF' } : undefined}>
           {filter.label}
         </Text>
       </Pressable>
