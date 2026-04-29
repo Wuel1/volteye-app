@@ -8,12 +8,12 @@ import { homeClasses, homePalette } from '../styles';
 
 export function MyDevicesSection({
   devices,
-  onOpenDevice,
-  onOpenDevices
+  onAddDevice,
+  onOpenDevice
 }: {
   devices: readonly HomeDevice[];
+  onAddDevice?: () => void;
   onOpenDevice?: (device: HomeDevice) => void;
-  onOpenDevices?: () => void;
 }) {
   return (
     <View className={homeClasses.devicesSection}>
@@ -23,7 +23,7 @@ export function MyDevicesSection({
           <DeviceListItem device={device} key={device.id} onPress={() => onOpenDevice?.(device)} />
         ))}
       </View>
-      <Pressable accessibilityRole="button" className={homeClasses.floatingAddButton} onPress={onOpenDevices}>
+      <Pressable accessibilityRole="button" className={homeClasses.floatingAddButton} onPress={onAddDevice}>
         <Plus color={colors.surface} size={18} strokeWidth={2.4} />
       </Pressable>
     </View>

@@ -5,6 +5,7 @@ import { Session } from '@supabase/supabase-js';
 
 import { TabBar, TabKey } from '../components/TabBar';
 import { AuthRoutes, GeneralRoutes, PrivateRoutes } from '../constants/routes';
+import { AddDeviceScreen } from '../screens/add-device';
 import { AuthScreen } from '../screens/auth/AuthScreen';
 import { AlertsScreen } from '../screens/alerts';
 import { DeviceDetailScreen } from '../screens/device-detail';
@@ -57,6 +58,7 @@ export function AppRouter() {
             <Stack.Screen component={MainScreen} name={PrivateRoutes.MAIN} />
             <Stack.Screen component={DevicesScreen} name={PrivateRoutes.DEVICES} />
             <Stack.Screen component={DeviceDetailScreen} name={PrivateRoutes.DEVICE_DETAIL} />
+            <Stack.Screen component={AddDeviceScreen} name={PrivateRoutes.ADD_DEVICE} />
           </>
         ) : (
           <>

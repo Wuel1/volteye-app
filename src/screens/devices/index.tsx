@@ -56,10 +56,10 @@ export function DevicesScreen({ navigation }: DevicesScreenProps) {
                 />
               ))}
             </View>
-            <AddDeviceButton />
+            <AddDeviceButton onPress={() => navigation.navigate(PrivateRoutes.ADD_DEVICE)} />
           </>
         ) : (
-          <EmptyDevicesState />
+          <EmptyDevicesState onAddDevice={() => navigation.navigate(PrivateRoutes.ADD_DEVICE)} />
         )}
       </ScrollView>
     </View>

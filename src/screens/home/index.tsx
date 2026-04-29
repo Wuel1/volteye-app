@@ -34,7 +34,7 @@ export function HomeScreen() {
     return (
       <ScrollView contentContainerClassName={homeClasses.content} showsVerticalScrollIndicator={false}>
         <HomeHeader userName={homeMock.userName} />
-        <EmptyDeviceState />
+        <EmptyDeviceState onAddDevice={() => navigation.navigate(PrivateRoutes.ADD_DEVICE)} />
       </ScrollView>
     );
   }
@@ -82,9 +82,10 @@ export function HomeScreen() {
       <PeakConsumptionCard peakTime={homeMock.summary.peakTime} />
       <InsightCard text={homeMock.summary.comparisonText} />
       <DailyConsumptionChart data={homeMock.chart} />
-      <QuickActions />
+      <QuickActions onAddDevice={() => navigation.navigate(PrivateRoutes.ADD_DEVICE)} />
       <MyDevicesSection
         devices={homeMock.devices}
+        onAddDevice={() => navigation.navigate(PrivateRoutes.ADD_DEVICE)}
         onOpenDevice={(selectedDevice) =>
           navigation.navigate(PrivateRoutes.DEVICE_DETAIL, {
             deviceId: selectedDevice.id,
@@ -92,7 +93,6 @@ export function HomeScreen() {
             deviceRoom: selectedDevice.room
           })
         }
-        onOpenDevices={() => navigation.navigate(PrivateRoutes.DEVICES)}
       />
     </ScrollView>
   );
