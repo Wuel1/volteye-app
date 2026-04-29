@@ -54,6 +54,11 @@ export function AddDeviceScreen({ navigation }: AddDeviceScreenProps) {
     }
 
     setIsPrepared(true);
+    navigation.navigate(PrivateRoutes.PAIR_DEVICE, {
+      deviceName: form.name.trim(),
+      deviceNote: form.note.trim(),
+      deviceRoom: form.room
+    });
   }
 
   return (

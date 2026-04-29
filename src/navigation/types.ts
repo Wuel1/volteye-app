@@ -8,4 +8,5 @@ export type RootStackParamList = {
   [PrivateRoutes.DEVICE_DETAIL]: { deviceId: string; deviceName?: string; deviceRoom?: string };
   [PrivateRoutes.DEVICES]: undefined;
   [PrivateRoutes.MAIN]: undefined;
+  [PrivateRoutes.PAIR_DEVICE]: { deviceName?: string; deviceNote?: string; deviceRoom?: string };
 };

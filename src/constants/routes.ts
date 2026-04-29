@@ -11,5 +11,6 @@ export const PrivateRoutes = {
   ADD_DEVICE: 'AddDevice',
   DEVICE_DETAIL: 'DeviceDetail',
   DEVICES: 'Devices',
-  MAIN: 'Main'
+  MAIN: 'Main',
+  PAIR_DEVICE: 'PairDevice'
 } as const;

@@ -12,6 +12,7 @@ import { DeviceDetailScreen } from '../screens/device-detail';
 import { DevicesScreen } from '../screens/devices';
 import { HomeScreen } from '../screens/home';
 import { OnboardingScreen } from '../screens/onboarding/onboarding';
+import { PairDeviceScreen } from '../screens/pair-device';
 import { ProfileScreen } from '../screens/profile';
 import { RegisterScreen } from '../screens/register/RegisterScreen';
 import { UsageScreen } from '../screens/usage';
@@ -59,6 +60,7 @@ export function AppRouter() {
             <Stack.Screen component={DevicesScreen} name={PrivateRoutes.DEVICES} />
             <Stack.Screen component={DeviceDetailScreen} name={PrivateRoutes.DEVICE_DETAIL} />
             <Stack.Screen component={AddDeviceScreen} name={PrivateRoutes.ADD_DEVICE} />
+            <Stack.Screen component={PairDeviceScreen} name={PrivateRoutes.PAIR_DEVICE} />
           </>
         ) : (
           <>
