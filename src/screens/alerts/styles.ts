@@ -37,7 +37,7 @@ export const alertsClasses = {
   emptyText: 'mt-2 text-center text-[15px] font-bold leading-[22px] text-textMuted',
   emptyTitle: 'mt-4 text-center text-[21px] font-black text-[#283351]',
   filterChip: 'min-h-[40px] rounded-full border border-[#E8ECFF] bg-surface px-4 items-center justify-center',
-  filterChipActive: 'border-[#4880FF] bg-[#4880FF]',
+  filterChipActive: 'border-[#4880FF] bg-primary',
   filterChipText: 'text-sm font-black text-textMuted',
   filterChipTextActive: 'text-white',
   filters: 'flex-row flex-wrap gap-2',

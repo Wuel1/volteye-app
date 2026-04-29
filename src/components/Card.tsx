@@ -7,9 +7,12 @@ type CardProps = PropsWithChildren<{
 }>;
 
 export function Card({ children, className = '', style }: CardProps) {
+  const hasCustomBackground = /\bbg-(?:\[[^\]]+\]|[^\s]+)/.test(className);
+  const backgroundClass = hasCustomBackground ? '' : 'bg-surface';
+
   return (
     <View
-      className={`rounded-card border border-[#E8ECFF] bg-surface p-4 shadow-sm ${className}`}
+      className={`rounded-card border border-[#E8ECFF] p-4 shadow-sm ${backgroundClass} ${className}`}
       style={style}
     >
       {children}

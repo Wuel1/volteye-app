@@ -5,17 +5,17 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        background: '#faf8ff',
+        background: '#F9F8FF',
         surface: '#ffffff',
-        surfaceMuted: '#eaedff',
-        surfaceStrong: '#dae2ff',
-        primary: '#0053ce',
-        primarySoft: '#dae2ff',
-        secondary: '#7146b6',
-        secondarySoft: '#ecdcff',
-        textMain: '#0f1a37',
-        textMuted: '#424654',
-        outlineSoft: '#c3c6d7'
+        surfaceMuted: '#EEF3FF',
+        surfaceStrong: '#E4E9FF',
+        primary: '#4880FF',
+        primarySoft: '#EEF3FF',
+        secondary: '#918BFF',
+        secondarySoft: '#F0ECFF',
+        textMain: '#283351',
+        textMuted: '#6F7894',
+        outlineSoft: '#E8ECFF'
       },
       borderRadius: {
         card: '16px',

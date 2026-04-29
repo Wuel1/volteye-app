@@ -2,8 +2,7 @@ export const devicesPalette = {
   primary: '#4880FF',
   secondary: '#918BFF',
   success: '#13A36F',
-  warning: '#FF8A3D',
-  text: '#283351'
+  warning: '#FF8A3D'
 };
 
 export const devicesClasses = {
@@ -17,7 +16,7 @@ export const devicesClasses = {
   cardMetric: 'flex-1 rounded-2xl bg-[#EEF3FF] p-3',
   cardMetricLabel: 'text-[11px] font-black uppercase text-textMuted',
   cardMetricValue: 'mt-1 text-lg font-black text-[#283351]',
-  content: 'gap-4 bg-[#F9F8FF] p-4 pt-6 pb-[124px]',
+  content: 'gap-4 bg-[#F9F8FF] p-4 pb-[124px]',
   deviceCard: 'rounded-3xl border-[#E8ECFF]',
   deviceCardOffline: 'opacity-70',
   deviceHeader: 'flex-row items-start gap-3',
@@ -36,11 +35,6 @@ export const devicesClasses = {
   filterChipText: 'text-sm font-black text-textMuted',
   filterChipTextActive: 'text-surface',
   filters: 'flex-row gap-2',
-  header: 'gap-3',
-  headerBack: 'h-10 w-10 items-center justify-center rounded-full bg-surface shadow-sm',
-  headerRow: 'flex-row items-center gap-3',
-  headerSubtitle: 'text-[15px] font-bold leading-[21px] text-textMuted',
-  headerTitle: 'text-[30px] font-black leading-9 text-[#283351]',
   highlightCard: 'rounded-3xl border-[#918BFF] bg-[#918BFF]',
   highlightBody: 'mt-2 text-sm font-bold leading-5 text-[#F6F3FF]',
   highlightLabel: 'text-xs font-black uppercase text-[#F0ECFF]',

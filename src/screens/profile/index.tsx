@@ -1,27 +1,19 @@
-import {
-  Bell,
-  Building2,
-  ChevronRight,
-  CircleHelp,
-  CreditCard,
-  LogOut,
-  Pencil,
-  PlugZap,
-  User
-} from 'lucide-react-native';
+import { Bell, Building2, CircleHelp, CreditCard, PlugZap, User } from 'lucide-react-native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { useNavigation } from '@react-navigation/native';
 import { User as SupabaseUser } from '@supabase/supabase-js';
-import { ReactNode, useEffect, useState } from 'react';
-import { Pressable, ScrollView, Text, View } from 'react-native';
+import { useEffect, useState } from 'react';
+import { ScrollView } from 'react-native';
 
-import { Card } from '../../components/Card';
 import { PrivateRoutes } from '../../constants/routes';
 import { profileMock } from '../../data/energy';
 import { supabase } from '../../lib/supabase';
 import { RootStackParamList } from '../../navigation/types';
-import { colors } from '../../theme/theme';
-import { profileClasses, profilePalette } from './styles';
+import { LogoutButton } from './components/LogoutButton';
+import { ProfileHeader } from './components/ProfileHeader';
+import { ProfileRow, ProfileRowItem } from './components/ProfileRow';
+import { ProfileSection } from './components/ProfileSection';
+import { profileClasses } from './styles';
 
 const accountItems = [
   {
@@ -32,7 +24,7 @@ const accountItems = [
     Icon: Building2,
     title: 'Meu imóvel/local'
   }
-];
+] satisfies ProfileRowItem[];
 
 const energyItems = [
   {
@@ -48,7 +40,7 @@ const energyItems = [
     subtitle: '(R$/kWh)',
     title: 'Tarifa de energia'
   }
-] as const;
+] satisfies ProfileRowItem[];
 
 const systemItems = [
   {
@@ -59,7 +51,7 @@ const systemItems = [
     Icon: CircleHelp,
     title: 'Ajuda'
   }
-];
+] satisfies ProfileRowItem[];
 
 export function ProfileScreen() {
   const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
@@ -122,83 +114,6 @@ export function ProfileScreen() {
 
       <LogoutButton isLoading={isSigningOut} onPress={handleSignOut} />
     </ScrollView>
-  );
-}
-
-function ProfileHeader({ user }: { user: typeof profileMock.user }) {
-  return (
-    <View className={profileClasses.header}>
-      <View className={profileClasses.avatarFrame}>
-        <View className={profileClasses.avatar}>
-          <Text className={profileClasses.avatarText}>{user.initials}</Text>
-        </View>
-        <View className={profileClasses.editBadge}>
-          <Pencil color={colors.surface} size={12} />
-        </View>
-      </View>
-      <Text className={profileClasses.headerName}>{user.name}</Text>
-      <Text className={profileClasses.headerEmail}>{user.email}</Text>
-    </View>
-  );
-}
-
-function ProfileSection({ children, title }: { children: ReactNode; title: string }) {
-  return (
-    <View className={profileClasses.section}>
-      <Text className={profileClasses.sectionLabel}>{title}</Text>
-      <Card className={profileClasses.groupCard}>{children}</Card>
-    </View>
-  );
-}
-
-function ProfileRow({
-  isLast,
-  item,
-  onPress
-}: {
-  isLast: boolean;
-  item: {
-    Icon: typeof User;
-    rightMeta?: string;
-    rightMetaTone?: 'primary' | 'success';
-    subtitle?: string;
-    title: string;
-  };
-  onPress?: () => void;
-}) {
-  const Icon = item.Icon;
-
-  return (
-    <Pressable accessibilityRole="button" className={`${profileClasses.row} ${isLast ? profileClasses.rowLast : ''}`} onPress={onPress}>
-      <View className={profileClasses.rowIcon}>
-        <Icon color={profilePalette.primary} size={19} />
-      </View>
-      <View className={profileClasses.rowText}>
-        <Text className={profileClasses.rowTitle}>{item.title}</Text>
-        {item.subtitle ? <Text className={profileClasses.rowSubtitle}>{item.subtitle}</Text> : null}
-      </View>
-      {item.rightMeta ? (
-        <Text
-          className={`${profileClasses.rowMeta} ${
-            item.rightMetaTone === 'success' ? profileClasses.rowMetaSuccess : profileClasses.rowMetaPrimary
-          }`}
-        >
-          {item.rightMeta}
-        </Text>
-      ) : null}
-      <ChevronRight color={colors.textMuted} size={19} />
-    </Pressable>
-  );
-}
-
-function LogoutButton({ isLoading, onPress }: { isLoading: boolean; onPress: () => void }) {
-  return (
-    <Pressable accessibilityRole="button" className={profileClasses.logoutButton} disabled={isLoading} onPress={onPress}>
-      <View className="flex-row items-center gap-2">
-        <LogOut color={colors.danger} size={18} />
-        <Text className={profileClasses.logoutButtonText}>{isLoading ? 'Saindo...' : 'Sair'}</Text>
-      </View>
-    </Pressable>
   );
 }
 

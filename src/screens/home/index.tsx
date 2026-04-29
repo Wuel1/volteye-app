@@ -9,17 +9,15 @@ import { SummaryCard } from '../../components/SummaryCard';
 import { PrivateRoutes } from '../../constants/routes';
 import { homeMock } from '../../data/energy';
 import { RootStackParamList } from '../../navigation/types';
-import {
-  CurrentConsumptionCard,
-  DailyConsumptionChart,
-  EmptyDeviceState,
-  HomeHeader,
-  InsightCard,
-  MyDevicesSection,
-  OfflineState,
-  PeakConsumptionCard,
-  QuickActions
-} from './components';
+import { CurrentConsumptionCard } from './components/CurrentConsumptionCard';
+import { DailyConsumptionChart } from './components/DailyConsumptionChart';
+import { EmptyDeviceState } from './components/EmptyDeviceState';
+import { HomeHeader } from './components/HomeHeader';
+import { InsightCard } from './components/InsightCard';
+import { MyDevicesSection } from './components/MyDevicesSection';
+import { OfflineState } from './components/OfflineState';
+import { PeakConsumptionCard } from './components/PeakConsumptionCard';
+import { QuickActions } from './components/QuickActions';
 import { homeClasses, homePalette } from './styles';
 
 const currencyFormatter = new Intl.NumberFormat('pt-BR', {
