@@ -6,13 +6,21 @@ import { HomeDevice } from '../../../data/energy';
 import { colors } from '../../../theme/theme';
 import { homeClasses, homePalette } from '../styles';
 
-export function MyDevicesSection({ devices, onOpenDevices }: { devices: readonly HomeDevice[]; onOpenDevices?: () => void }) {
+export function MyDevicesSection({
+  devices,
+  onOpenDevice,
+  onOpenDevices
+}: {
+  devices: readonly HomeDevice[];
+  onOpenDevice?: (device: HomeDevice) => void;
+  onOpenDevices?: () => void;
+}) {
   return (
     <View className={homeClasses.devicesSection}>
       <SectionHeader title="Minhas tomadas" />
       <View className={homeClasses.devicesList}>
         {devices.map((device) => (
-          <DeviceListItem device={device} key={device.id} onPress={onOpenDevices} />
+          <DeviceListItem device={device} key={device.id} onPress={() => onOpenDevice?.(device)} />
         ))}
       </View>
       <Pressable accessibilityRole="button" className={homeClasses.floatingAddButton} onPress={onOpenDevices}>

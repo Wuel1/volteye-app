@@ -83,7 +83,17 @@ export function HomeScreen() {
       <InsightCard text={homeMock.summary.comparisonText} />
       <DailyConsumptionChart data={homeMock.chart} />
       <QuickActions />
-      <MyDevicesSection devices={homeMock.devices} onOpenDevices={() => navigation.navigate(PrivateRoutes.DEVICES)} />
+      <MyDevicesSection
+        devices={homeMock.devices}
+        onOpenDevice={(selectedDevice) =>
+          navigation.navigate(PrivateRoutes.DEVICE_DETAIL, {
+            deviceId: selectedDevice.id,
+            deviceName: selectedDevice.name,
+            deviceRoom: selectedDevice.room
+          })
+        }
+        onOpenDevices={() => navigation.navigate(PrivateRoutes.DEVICES)}
+      />
     </ScrollView>
   );
 }

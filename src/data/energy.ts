@@ -578,3 +578,113 @@ export const devicesMock: DevicesData = {
     }
   ]
 };
+
+export type DeviceDetailAlert = {
+  id: string;
+  title: string;
+  date: string;
+  description: string;
+  severity: AlertSeverity;
+};
+
+export type DeviceDetailData = {
+  id: string;
+  name: string;
+  room: string;
+  status: DeviceManagementStatus;
+  lastUpdate: string;
+  currentPowerWatts: number;
+  lastKnownPowerWatts: number;
+  statusText: string;
+  today: {
+    consumptionKwh: number;
+    cost: number;
+    activeTime: string;
+  };
+  recentChart: {
+    label: string;
+    value: number;
+  }[];
+  alerts: DeviceDetailAlert[];
+  recommendation: string;
+};
+
+export const deviceDetailsMock: DeviceDetailData[] = [
+  {
+    id: '1',
+    name: 'Tomada principal',
+    room: 'Sala',
+    status: 'online',
+    lastUpdate: 'Atualizado ha poucos segundos',
+    currentPowerWatts: 328,
+    lastKnownPowerWatts: 314,
+    statusText: 'Consumo dentro do normal',
+    today: {
+      consumptionKwh: 3.8,
+      cost: 2.37,
+      activeTime: '6h 20min'
+    },
+    recentChart: [
+      { label: '08h', value: 0.3 },
+      { label: '10h', value: 0.5 },
+      { label: '12h', value: 0.7 },
+      { label: '14h', value: 0.4 },
+      { label: '16h', value: 0.9 },
+      { label: '18h', value: 1.4 },
+      { label: '20h', value: 0.8 }
+    ],
+    alerts: [
+      {
+        id: 'alert-1',
+        title: 'Consumo acima do padrao',
+        date: 'Hoje, 19:42',
+        description: 'A tomada consumiu 42% acima da media para este horario.',
+        severity: 'high'
+      },
+      {
+        id: 'alert-2',
+        title: 'Pico detectado',
+        date: 'Hoje, 18:20',
+        description: 'O maior pico de consumo ocorreu entre 18h e 20h.',
+        severity: 'medium'
+      }
+    ],
+    recommendation:
+      'Seu maior consumo costuma acontecer no periodo da noite. Verifique se o equipamento conectado precisa ficar ligado nesse horario.'
+  },
+  {
+    id: '2',
+    name: 'Tomada do escritorio',
+    room: 'Escritorio',
+    status: 'offline',
+    lastUpdate: 'Ultima atualizacao ha 20 minutos',
+    currentPowerWatts: 0,
+    lastKnownPowerWatts: 86,
+    statusText: 'Ultimo consumo registrado',
+    today: {
+      consumptionKwh: 1.2,
+      cost: 0.94,
+      activeTime: '2h 45min'
+    },
+    recentChart: [
+      { label: '08h', value: 0.2 },
+      { label: '10h', value: 0.4 },
+      { label: '12h', value: 0.3 },
+      { label: '14h', value: 0.5 },
+      { label: '16h', value: 0.2 },
+      { label: '18h', value: 0.0 },
+      { label: '20h', value: 0.0 }
+    ],
+    alerts: [
+      {
+        id: 'alert-4',
+        title: 'Dispositivo offline',
+        date: 'Hoje, 18:35',
+        description: 'Nao recebemos dados da tomada nos ultimos 20 minutos.',
+        severity: 'low'
+      }
+    ],
+    recommendation:
+      'A tomada esta sem dados em tempo real. Confira a conexao Wi-Fi antes de avaliar o consumo mais recente.'
+  }
+];

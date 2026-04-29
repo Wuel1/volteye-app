@@ -43,7 +43,17 @@ export function DevicesScreen({ navigation }: DevicesScreenProps) {
             <View className="gap-3">
               <SectionHeader title="Tomadas cadastradas" />
               {filteredDevices.map((device) => (
-                <DeviceCard device={device} key={device.id} />
+                <DeviceCard
+                  device={device}
+                  key={device.id}
+                  onPress={() =>
+                    navigation.navigate(PrivateRoutes.DEVICE_DETAIL, {
+                      deviceId: device.id,
+                      deviceName: device.name,
+                      deviceRoom: device.room
+                    })
+                  }
+                />
               ))}
             </View>
             <AddDeviceButton />
